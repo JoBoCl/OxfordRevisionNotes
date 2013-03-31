@@ -1,0 +1,272 @@
+Lemmas
+======
+
+Arrangements of $n$ objects
+---------------------------
+
+The number of arrangements of the $n$ objects
+$$\underbrace{x_1,x_1,x_1\ldots ,x_1}_\text{$m_1$ times},\underbrace{x_2,x_2,x_2\ldots ,x_2}_\text{$m_2$ times},\ldots,\underbrace{x_k,x_k,x_k\ldots,x_k}_\text{$m_k$ times}$$
+where $x_i$ appears $m_i$ times is
+
+$$\label{lem1}
+\frac{n!}{m_1!m_2!\ldots m_k!}$$
+
+If just 2 tpes of object are present, then the binomial co-efficient may
+be used.
+$m_1+m_2=n\Rightarrow\eqref{lem1}=\binom{n}{m_1}=\binom{n}{m_2}$
+
+Vandermonde’s Identity
+----------------------
+
+$$\label{lemvandermonde}
+\binom{m+n}{k}=\sum^k_{j=0}\binom{m}{j}\binom{n}{k-j}$$
+
+where $\binom{m}{j}=0\text{ for }j>m$.
+
+For example, suppose we choose a committee consisting of $k$ people from
+a group of $m$ men and $n$ women. There are $m+n$ ways of doing this
+which is the left-hand side of .
+
+Now the number of men in the committee is some $j\in\{0,1,\ldots,k\}$ so
+it contains $k-j$ women. The number of ways of choosing the $j$ men is
+$\binom{m}{j}$ and for each such choice there are $\binom{n}{k-j}$
+choices for the women who make up the rest of the committee. So there
+are $\binom{m}{j}\binom{n}{k-j}$ committees with exactly $j$ men and
+summing over $j$ we get that the total number of committees is given by
+the right-hand side of
+
+Definitions
+===========
+
+Probability Space
+-----------------
+
+A probability space is a triple $(\Omega,\mathcal{F},\mathbb{P})$where
+
+$\Omega$ is the sample space
+
+$\mathcal{F}$ is a collection of subsets of $\Omega$, called events,
+satisfying axioms [f1], [f2], [f3] below,
+
+$\mathbb{P}$ is a probability measure which is a function
+$\mathbb{P}:\mathcal{F}\to\left[0,1\right]$ satisfying axioms [p1] to
+[p4] below.
+
+Conditional Probability
+-----------------------
+
+If $\mathbb{P}\left(B\right)>0$ the conditional probability of $A$ given
+$B$ is
+$$\mathbb{P}\left(A|B\right)=\frac{\mathbb{P}\left(A\cap B\right)}{\mathbb{P}\left(B\right)}$$
+
+Independence
+------------
+
+For a pair of events $A$ and $B$, $A$ and $B$ are independent if
+$\mathbb{P}\left(A\cap B\right)=\mathbb{P}\left(A\right)\mathbb{P}\left(B\right)$.
+
+The family of events $\{A_i,i\in I\}$ where $I$ is an index set; is
+independent
+if$$\mathbb{P}\left(\bigcap_{i\in J} A_i\right)=\prod_{i\in J} \mathbb{P}\left(A_i\right)\text{ for all finite subsets } J\in I$$
+
+A family $\{A_i, i\in I\}$ is pairwise independent if
+$\mathbb{P}\left(A_i, i \in I)=\mathbb{P}(A_i)\mathbb{P}(A_j\right),\forall i\neq j$.
+Pairwise independence does not imply independence.
+
+Note: for the independent events $A$ and $B$, knowing
+$\mathbb{P}\left(A\right)$ does not imply knowledge of
+$\mathbb{P}\left(B\right)$
+
+Discrete Random Variables
+-------------------------
+
+A discrete random variable $X$ on a probability space
+$(\Omega,\mathcal{F},\mathbb{P})$ is simply a function
+$X:\Omega\to\mathbb{R}$ with the properties that:
+
+$\mathop{\mathrm{Im}}(X)=\{X(\omega):\omega\in\Omega\}$ is a finite or
+countably infinite subset of $\mathbb{R}$. i.e.
+$\mathop{\mathrm{Im}}(X)$ can be written as $\{x_0,x_1,x_2\ldots\}$.
+Usually $\mathop{\mathrm{Im}}(X)$ will be $\mathbb{N}$ or a subset of
+$\mathbb{N}$.
+
+$\{\omega\in\Omega:X(\omega)=x\}\in\mathcal{F}\text{ for each }x\in\mathbb{R}$.
+This says that if $\{\omega\in\Omega:X(\omega)=x\}$ is an event then we
+can assign a probability to it. $\{\omega\in\Omega:X(\omega)=x\}$ is
+usually abbreviated to $\{X=x\}$. $\mathbb{P}\left(X=x\right)$ is used
+as a shorthand for
+$\mathbb{P}\left(\{\omega\in\Omega:X(\omega)=x\}\right)$
+
+Probability Mass Function
+-------------------------
+
+The probability mass function of a discrete random variable $X$ is the
+function $p_X:\mathbb{R}\to\left[0,1\right]$ defined by
+$p_X(x)=\mathbb{P}\left(X=x\right)$. If
+$x\not\in\mathop{\mathrm{Im}}(X)$ then
+$p_X(x)=\mathbb{P}\left(X=x)=\mathbb{P}(\emptyset\right)=0$. Also if
+$\mathop{\mathrm{Im}}(X)=\{x_0,x_1,\ldots\}$ then
+
+$$\begin{aligned}
+\sum_{i\in\mathop{\mathrm{Im}}}(X)p_X(x)&=\sum_{i\ge0}=p_X(x_i)\\
+&=\sum_{i\ge0}\mathbb{P}\left(\{\omega\in\Omega:X(\omega)=x_i\}\right)\\
+\intertext{events are disjoint}&=\mathbb{P}\left(\bigcup_{i\ge0}\{\omega\in\Omega:X(\omega)=x_i\}\right)\\
+\intertext{every event in $\Omega$ mapped to $x_0,x_1,\ldots$}&=\mathbb{P}\left(\Omega\right)\\
+\intertext{By \eqref{p1}}&=1\end{aligned}$$
+
+Classical Distributions
+-----------------------
+
+### Bernoulli Distribution
+
+$X$ has the Bernoulli Distribution with parameter $p$, where
+$p\in\left[0,1\right]$ if $\mathbb{P}\left(X=0\right)=1-p$ and
+$\mathbb{P}\left(X=1\right)=p$. As $1-p+p=1$, $X$ can only take the
+values $0$ and $1$. $p_X(0)=1-p$ and $p_X(1)=p$. $\mathbbm{1}_A$ (the
+indicator function of $A$) is an example of a Bernoulli random variable
+with $p=\mathbb{P}\left(A\right)$, constructed on an explicit
+probability space. We write $X\sim\mathrm{Ber}(p)$ to indicate a
+discrete random variable $X$ modelled by $\mathrm{Ber}(p)$. Can be used
+to model flipping a (possibly unfair) coin.
+
+### Binomial Distribution
+
+$X$ has a binomial distribution with parameters $n$ and $p$, where
+$n\in\mathbb{Z},p\in\left[0,1\right]$ if
+$\mathbb{P}\left(X=k\right)=\binom{n}{k}p^k(1-p)^{n-k}$ for some
+constant $k$ where $0\le k\le n$. We write $X\sim\mathrm{Bin}(n,p)$. For
+example, the number of heads from $n$ independent trials where
+$\mathbb{P}\left(\{\text{heads}\}\right)=p$
+
+### Geometric Distribution
+
+$X$ has a geometric distribution with parameter $p\in\left[0,1\right]$
+if $\mathbb{P}\left(X=k\right)=(1-p)^{k-1}p,k\in\mathbb{Z}$. We write
+$X\sim\mathrm{Geom}(p)$. It is used to model the number of independent
+trials needed until the first success occurs, where
+$\mathbb{P}\left(\{\text{success}\}\right)=p$
+
+### Alternative Geometric Distribution
+
+Is used to model the number of failures before first success.
+$\mathbb{P}\left(Y=k\right)=(1-p)^kp,k\ge0$
+
+### Poisson Distribution
+
+$X$ has a Poisson distribution with parameter
+$\lambda\ge0,\lambda\in\mathbb{R}$ if
+$\mathbb{P}\left(X=k\right)=e^{-\lambda}\frac{\lambda^k}{k!}$,
+$k\in\mathbb{Z}_0$. We write this as $X\sim\mathrm{Po}(\lambda)$ and is
+used to model events occuring at a constant average rate $\lambda$.
+
+Axioms
+======
+
+$$\tag{F$_1$}\label{f1}
+\emptyset\in\mathcal{F},\Omega\in\mathcal{F}$$
+
+The empty set and the sample space are both in the list of possible
+outcomes. i.e. nothing happens, or something happens.
+
+$$\tag{F$_2$}\label{f2}
+\text{If }A,B\in\mathcal{F}\text{, then }A^c\in\mathcal{F}\text{ and }A\cup B\in \mathcal{F}$$
+
+For any set in the set of possible outcomes, its complement is in the
+list of outcomes. For any two sets in the set of possible outcomes,
+their unison is in the list of outcomes.
+
+$$\tag{F$_3$}\label{f3}
+\text{If }A_i\in\mathcal{F}\text{ for }i\ge1\text{, then }\bigcup^\infty_{i=1}A_i\in\mathcal{F}$$
+
+For any list of sets in the set of possible outcomes, the union of the
+list of sets is a possible outcome.
+
+$$\tag{P$_1$}\label{p1}
+\forall A\in\mathcal{F}, \mathbb{P}\left(A\right)\ge0$$
+
+Any outcome in the list of possible outcomes has a chance of occuring
+(probability of greater than 0) or no chance of occuring (probability of
+0)
+
+$$\tag{P$_2$}\label{p2}
+\mathbb{P}\left(\Omega\right)=1$$
+
+The probability of any outcome occurring is 1. (Something will always
+happen)
+
+$$\tag{P$_3$}\label{p3}
+\text{If }A,B\in\mathcal{F}\text{ and }A\cap B=\emptyset\text{ then }\mathbb{P}\left(A\cup B\right)=\mathbb{P}\left(A\right)+\mathbb{P}\left(B\right)$$
+
+If two sets of outcomes are disjoint (mutually exclusive), then the
+probability of either is the sum of their individual probabilities.
+
+$$\tag{P$_4$}\label{p4}
+\text{If }A_i\in\mathcal{F}\text{ for }i\ge1\text{ and }A_i\cap A_j=\emptyset\text{ for }i\neq j\text{ then }\mathbb{P}\left(\bigcup_{i=1}^\infty A_i\right)=\sum_{i=1}^\infty \mathbb{P}\left(A_i\right)$$
+
+For a set of mutually exlusive events, the probability of any one
+happening is the same as the sum of all the individual events.
+
+Theorems
+========
+
+Let $(\Omega,\mathcal{F},\mathbb{P})$ be a probability space.
+
+$\mathbb{P}(A^c)=1-\mathbb{P}\left(A\right)$
+
+$$\begin{aligned}
+A\cup A^c=\Omega\text{ and }&A \cap A^c = \emptyset\\
+\text{By \eqref{p3} }\Rightarrow\mathbb{P}\left(\Omega\right) &= \mathbb{P}\left(A\right)+\mathbb{P}(A^c)\\
+\text{By \eqref{p2} }\Rightarrow1&=\mathbb{P}\left(A\right)+\mathbb{P}(A^c)\\
+\Rightarrow\mathbb{P}(A^c)&=1-\mathbb{P}\left(A\right)\end{aligned}$$
+
+If $A\subseteq B\Rightarrow \mathbb{P}\left(A)\le\mathbb{P}(B\right)$
+
+Since
+$A\subseteq B, B=A\cup\left(B\cap A^c\right)\text{. Since }B\cap A^c\subseteq A^c$,
+it must be disjoint from $A$. So by ,
+$\mathbb{P}\left(B)=\mathbb{P}(A\right)+\mathbb{P}(B\cap A^c)$. Since by
+, $\mathbb{P}(B\cap A^c)\ge 0$, we thus have
+$\mathbb{P}\left(B)\ge\mathbb{P}(A\right)$.
+
+Suppose $\mathbb{P}\left(B\right)>0$. Define the new function
+$\mathbb{Q} : \mathcal{F}\to \mathbb{R}$ then
+$\mathbb{Q}(A)=\mathbb{P}\left(A|B\right)$. Then
+$(\Omega, \mathcal{F}, \mathbb{Q})$ is also a probability space.
+
+We only need to check that $\mathbb{Q}$ satisfies to as we are using the
+same $\mathcal{F}$.
+$$\mathbb{Q}(A)=\frac{\mathbb{P}\left(A\cap B\right)}{\mathbb{P}\left(B\right)}\ge0$$
+$$\mathbb{Q}(\Omega)=\frac{\mathbb{P}\left(\Omega\cap B\right)}{\mathbb{P}\left(B\right)}=\frac{\mathbb{P}\left(B\right)}{\mathbb{P}\left(B\right)}$$
+and have the same proof, so we just do : For disjoint events
+$A_1, A_2,\ldots,$
+
+$$\begin{aligned}
+\mathbb{Q}\left(\bigcup_{i=1}^\infty A_i\right)&=\frac{\mathbb{P}\left(\left(\bigcup_{i=1}^\infty A_i\right)\cap B\right)}{\mathbb{P}\left(B\right)}\\
+&=\frac{\mathbb{P}\left(\bigcup_{i=1}^\infty\left( A_i\cap B\right)\right)}{\mathbb{P}\left(B\right)}\\
+\intertext{(because $A_i\cap B, i\ge 1$, are disjoint)}
+&=\frac{\sum_{i=1}^\infty\mathbb{P}\left(A_i\cap B\right)}{\mathbb{P}\left(B\right)}\\
+&=\sum_{i=1}^\infty\mathbb{Q}(A_i)\end{aligned}$$
+
+$A$ and $B$ are independent. Then $A$ and $B^c$ are independent and
+$A^c$ and $B^c$ are independent.
+
+$A=(A\cap B)\cup(A\cap B^c)$ and $(A\cap B)\cap(A\cap B^c)=\emptyset$
+
+$$\begin{aligned}
+\intertext{So}\mathbb{P}\left(A\cap B^c\right)&=\mathbb{P}\left(A\right)-\mathbb{P}\left(A\cap B\right)\\
+&=\mathbb{P}\left(A\right)(1-\mathbb{P}\left(B)\right)\\
+&=\mathbb{P}\left(A\right)\mathbb{P}\left(B^c\right)\end{aligned}$$
+
+Apply above to $B^c\text{ and }A$
+
+(Law of Total Probability or Partition Theorem) If $\{B_1,B_2\ldots\}$
+if a partitions of $\Omega$ such that
+$\mathbb{P}\left(B_i\right)>0,\forall i\ge1$ then
+$\mathbb{P}\left(A\right)=\sum_{i\ge1}\mathbb{P}\left(A|B_i\right)\mathbb{P}\left(B_i\right)$
+
+$$\begin{aligned}
+\mathbb{P}\left(A\right)&=\mathbb{P}\left(A\cap\Omega\right)\\
+\intertext{Since $\bigcup_{i\ge1}B_i=\Omega$}&=\mathbb{P}\left(A\cap\bigcup_{i\ge1}B_i\right)\\
+&=\mathbb{P}\left(\bigcup_{i\ge1}\left(B_i\cap A\right)\right)\\
+\intertext{As $A\cap B_i=\emptyset\text{ for }i\ge1$, then by \eqref{p4}}&=\sum_{i\ge1}\mathbb{P}\left(A\cap B_i\right)\\
+\intertext{Through application of the multiplication rule}&=\sum_{i\ge1}\mathbb{P}\left(A\cap B_i\right)\mathbb{P}\left(B_i\right)\end{aligned}$$

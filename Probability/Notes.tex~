@@ -1,0 +1,127 @@
+\documentclass{article}
+
+%\usepackage[cm]{fullpage}
+
+\usepackage{amsmath,amssymb,mdwlist,amsthm,lmodern}
+\numberwithin{equation}{subsection}
+\title{Probability Lemmas, Definitions, Axioms and Theorems}
+\author{}
+\date{}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\FF}{\mathcal{F}}
+\begin{document}
+\maketitle
+\section{Lemmas}
+\subsection{Arrangements of $n$ objects}
+The number of arrangements of the $n$ objects \[\underbrace{x_1,x_1,x_1\ldots ,x_1}_\text{$m_1$ times},\underbrace{x_2,x_2,x_2\ldots ,x_2}_\text{$m_2$ times},\ldots,\underbrace{x_k,x_k,x_k\ldots,x_k}_\text{$m_k$ times}\] where $x_i$ appears $m_i$ times is 
+\begin{equation}\label{lem1}
+\frac{n!}{m_1!m_2!\ldots m_k!}
+\end{equation}
+If just 2 tpes of object are present, then the binomial co-efficient may be used.  $m_1+m_2=n\Rightarrow\eqref{lem1}=\binom{n}{m_1}=\binom{n}{m_2}$
+\subsection{Vandermonde's Identity}
+\begin{equation}\label{lemvandermonde}
+\binom{m+n}{k}=\sum^k_{j=0}\binom{m}{j}\binom{n}{k-j}
+\end{equation}
+where $\binom{m}{j}=0\text{ for }j>m$.
+
+\begin{proof} For example, suppose we choose a committee consisting of $k$ people from a group of $m$ men and $n$ women.
+There are $m+n$ ways of doing this which is the left-hand side of \eqref{lemvandermonde}.
+
+Now the number of men in the committee is some $j\in\{0,1,\ldots,k\}$ so it contains $k-j$ women.  The number of ways of choosing the $j$ men is $\binom{m}{j}$ and for each such choice there are $\binom{n}{k-j}$ choices for the women who make up the rest of the committee. So there are $\binom{m}{j}\binom{n}{k-j}$ committees with exactly $j$ men and summing over $j$ we get that the total number of committees is given by the right-hand side of \eqref{lemvandermonde}
+\end{proof}
+\section{Definitions}
+\subsection{Probability Space}
+A probability space is a triple $(\Omega,\FF,\PP)$where
+\begin{itemize*}
+\item $\Omega$ is the sample space
+\item $\FF$ is a collection of subsets of $\Omega$, called events, satisfying axioms \eqref{f1}, \eqref{f2}, \eqref{f3} below,
+\item $\PP$ is a probability measure which is a function $\PP:\FF\to\left[0,1\right]$ satisfying axioms \eqref{p1} to \eqref{p4} below.
+\end{itemize*}
+\subsection{Conditional Probability}
+If $\PP(B)>0$ the conditional probability of $A$ given $B$ is $\PP\left(A|B\right)=\frac{\PP\left(A\cap B\right)}{\PP(B)}$
+\subsection{Independence}
+For a pair of events $A$ and $B$, $A$ and $B$ are independent if $\PP\left(A\cap B\right)=\PP(A)\PP(B)$.
+
+The family of events $\{A_i,i\in I\}$ where $I$ is an index set; is independent if\[\PP\left(\bigcap_{i\in J} A_i\right)=\prod_{i\in J} \PP\left(A_i\right)\text{ for all finite subsets } J\in I\]
+
+A family $\{A_i, i\in I\}$ is pairwise independent if $\PP\left(A_i, i \in I\right)=\PP\left(A_i\right)\PP\left(A_j\right),\forall i\neq j$.  Pairwise independence does not imply independence.
+
+{\small Note: for the independent events $A$ and $B$, knowing $\PP(A)$ does not imply knowledge of $\PP(B)$}
+\section{Axioms}
+\begin{itemize*}
+\item\begin{equation}\label{f1}
+\emptyset\in\FF,\Omega\in\FF
+\end{equation}
+The empty set and the sample space are both in the list of possible outcomes. i.e. nothing happens, or something happens.
+\item\begin{equation}\label{f2}
+\text{If }A,B\in\FF\text{, then }A^c\in\FF\text{ and }A\cup B\in \FF
+\end{equation}
+For any set in the set of possible outcomes, its complement is in the list of outcomes.
+For any two sets in the set of possible outcomes, their unison is in the list of outcomes.
+\item\begin{equation}\label{f3}
+\text{If }A_i\in\FF\text{ for }i\ge1\text{, then }\bigcup^\infty_{i=1}A_i\in\FF
+\end{equation}
+For any list of sets in the set of possible outcomes, the union of the list of sets is a possible outcome.
+\item\begin{equation}\label{p1}
+\forall A\in\FF, \PP(A)\ge0 
+\end{equation}
+Any outcome in the list of possible outcomes has a chance of occuring (probability of greater than 0) or no chance of occuring (probability of 0)
+\item\begin{equation}\label{p2}
+\PP(\Omega)=1
+\end{equation}
+The probability of any outcome occurring is 1. (Something will always happen)
+\item\begin{equation}\label{p3}
+\text{If }A,B\in\FF\text{ and }A\cap B=\emptyset\text{ then }\PP(A\cup B)=\PP(A)+\PP(B)
+\end{equation}
+If two sets of outcomes are disjoint (mutually exclusive), then the probability of either is the sum of their individual probabilities.
+\item\begin{equation}\label{p4}
+\text{If }A_i\in\FF\text{ for }i\ge1\text{ and }A_i\cap A_j=\emptyset\text{ for }i\neq j\text{ then }\PP\left(\bigcup_{i=1}^\infty A_i\right)=\sum_{i=1}^\infty \PP\left(A_i\right)
+\end{equation}
+For a set of mutually exlusive events, the probability of any one happening is the same as the sum of all the individual events.
+\end{itemize*}
+\section{Theorems}
+Let $(\Omega,\FF,\PP)$ be a probability space.
+\begin{itemize*}
+\item $\PP(A^c)=1-\PP(A)$
+\begin{proof}
+\begin{align*}
+A\cup A^c=\Omega\text{ and }&A \cap A^c = \emptyset\\
+\text{By \eqref{p3} }\Rightarrow\PP(\Omega) &= \PP(A)+\PP(A^c)\\
+\text{By \eqref{p2} }\Rightarrow1&=\PP(A)+\PP(A^c)\\
+\Rightarrow\PP(A^c)&=1-\PP(A)
+\end{align*}
+\end{proof}
+\item If $A\subseteq B\Rightarrow \PP(A)\le\PP(B)$
+\begin{proof}
+Since $A\subseteq B, B=A\cup\left(B\cap A^c\right)\text{. Since} B\cap A^c\subseteq A^c$, it musc be disjoint from $A$.  So by \eqref{p3}, $\PP(B)=\PP(A)+\PP(B\cap A^c)$.
+Since by \eqref{p1}, $\PP(B\cap A^c)\ge 0$, we thus have $\PP(B)\ge\PP(A)$.
+\end{proof}
+\item Suppose $\PP(B)>0$.  Define the new function $\mathbb{Q} : \FF \to \mathbb{R}$ then $\mathbb{Q}(A)=\PP(A|B)$.  Then $(\Omega, \FF, \mathbb{Q})$ is also a probability space.
+\begin{proof}
+We only need to check that $\mathbb{Q}$ satisfies \eqref{p1} to \eqref{p4} as we are using the same $\FF$.
+\eqref{p1}\[mathbb{Q}(A)=\frac{\PP(A\cap B)}{\PP(B)}\ge0\]
+\eqref{p2}\[\mathbb{Q}(\Omega)=\frac{\PP(\Omega\cap B)}{\PP(B)}=\frac{\PP(B)}{\PP(B)}\]
+\eqref{p3} and \eqref{p4} have the same proof, so we just do \eqref{p4}: For disjoint events $A_1, A_2,\ldots,$
+\begin{align*}
+\mathbb{Q}\left(\bigcup_{i=1}^\infty A_i\right)&=\frac{\PP\left(\left(\bigcup_{i=1}^\infty A_i\right)\cap B\right)}{\PP(B)}\\
+&=\frac{\PP\left(\bigcup_{i=1}^\infty\left( A_i\cap B\right)\right)}{\PP(B)}\\
+\intertext{(because $A_i\cap B, i\ge 1$, are disjoint)}
+&=\frac{\sum_{i=1}^\infty\PP\left(A_i\cap B\right)}{\PP(B)}\\
+&=\sum_{i=1}^\infty\mathbb{Q}(A_i)
+\end{align*}
+\end{proof}
+\item $A$ and $B$ are independent. Then $A$ and $B^c$ are independent and $A^c$ and $B^c$ are independent.
+\begin{proof}
+$A=(A\cap B)\cup(A\cap B^c)$ and $(A\cap B)\cap(A\cap B^c)=\emptyset$
+\begin{align*}
+\intertext{So}\PP\left(A\cap B^c\right)&=\PP(A)-\PP(A\cap B)\\
+&=\PP(A)(1-\PP(B))\\
+&=\PP(A)\PP\left(B^c\right)
+\end{align*}
+\end{proof}
+\begin{proof}
+Apply above to $B^c\text{ and }A$
+\end{proof}
+\item (Law of Total Probability or Partition Theorem)  If $\{B_1,B_2\ldots\}$ if a partitions of $\Omega$ such that $\PP\left(B_i\right)>0,\forall i\ge1$ then $\PP(A)=\sum_{i\ge1}\PP\left(A|B_i\right)\PP\left(B_i\right)$
+\end{itemize*}
+\end{document}

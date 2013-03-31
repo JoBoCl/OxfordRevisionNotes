@@ -1,0 +1,286 @@
+\documentclass[fontsize=10pt]{article}
+
+\usepackage[cm]{fullpage}
+
+\usepackage{amsmath,amssymb,mdwlist,amsthm,lmodern,amsfonts,mathtools}
+\usepackage{microtype,multicol}
+\usepackage{bbm}
+\usepackage[colorlinks=false,bookmarks=true]{hyperref}
+\numberwithin{equation}{subsection}
+\title{Probability Lemmas, Definitions, Axioms and Theorems}
+\author{}
+\date{}
+\newcommand{\PP}[1]{\mathbb{P}\left(#1\right)}
+\newcommand{\EE}[1]{\mathbb{E}\left[#1\right]}
+\newcommand{\image}{\mathop{\mathrm{Im}}}
+\newcommand{\setreal}{\mathbb{R}}
+\newcommand{\FF}{\mathcal{F}}
+\newcommand{\var}{\mathop{\mathrm{var}}}
+\newcommand{\cov}{\mathop{\mathrm{cov}}}
+\begin{document}
+\maketitle
+\tableofcontents\newpage
+\begin{multicols}{2}
+\section{Lemmas}
+\subsection{Arrangements of $n$ objects}
+The number of arrangements of the $n$ objects \[\underbrace{x_1,x_1,x_1\ldots ,x_1}_\text{$m_1$ times},\underbrace{x_2,x_2,x_2\ldots ,x_2}_\text{$m_2$ times},\ldots,\underbrace{x_k,x_k,x_k\ldots,x_k}_\text{$m_k$ times}\] where $x_i$ appears $m_i$ times is 
+\begin{equation}\label{lem1}
+\frac{n!}{m_1!m_2!\ldots m_k!}
+\end{equation}
+If just 2 tpes of object are present, then the binomial co-efficient may be used.  $m_1+m_2=n\Rightarrow\eqref{lem1}=\binom{n}{m_1}=\binom{n}{m_2}$
+\subsection{Vandermonde's Identity}
+\begin{equation}\label{lemvandermonde}
+\binom{m+n}{k}=\sum^k_{j=0}\binom{m}{j}\binom{n}{k-j}
+\end{equation}
+where $\binom{m}{j}=0\text{ for }j>m$.
+
+\begin{proof} For example, suppose we choose a committee consisting of $k$ people from a group of $m$ men and $n$ women.
+There are $m+n$ ways of doing this which is the left-hand side of \eqref{lemvandermonde}.
+
+Now the number of men in the committee is some $j\in\{0,1,\ldots,k\}$ so it contains $k-j$ women.  The number of ways of choosing the $j$ men is $\binom{m}{j}$ and for each such choice there are $\binom{n}{k-j}$ choices for the women who make up the rest of the committee. So there are $\binom{m}{j}\binom{n}{k-j}$ committees with exactly $j$ men and summing over $j$ we get that the total number of committees is given by the right-hand side of \eqref{lemvandermonde}
+\end{proof}
+\subsection{Probability Space}
+A probability space is a triple $(\Omega,\FF,\mathbb{P})$where
+\begin{itemize*}
+\item $\Omega$ is the sample space
+\item $\FF$ is a collection of subsets of $\Omega$, called events, satisfying axioms \ref{f1}, \ref{f2}, \ref{f3} below,
+\item $\mathbb{P}$ is a probability measure which is a function $\mathbb{P}:\FF\to\left[0,1\right]$ satisfying axioms \ref{p1} to \ref{p4} below.
+\end{itemize*}
+\subsection{Conditional Probability}
+If $\PP{B}>0$ the conditional probability of $A$ given $B$ is \[\PP{A|B}=\frac{\PP{A\cap B}}{\PP{B}}\]
+\subsection{Conditional Distribution}
+Suppose $B$ is an event such that $\PP B>0$.  Then the conditional distribution of $X\mid B$ is $\PP{X=x\mid B}\text{ for }x\in\setreal$.  \[p_{X\mid B}(x)=\frac{\PP{\{X=x\}\cap B}}{\PP B}\]The conditional expectation of $X\mid B$ is \[\EE{X\mid B}=\sum_{\mathclap{x\in\image X}}x\PP{X=x\mid B}\]
+\subsection{Conditional Expectation}
+The conditional expectation of $Y$ given $X=x$ is $\EE{Y\mid X=x}=\sum_yyp_{Y\mid X=x}(y)$ whenever this exists.
+\subsection{Independence}
+For a pair of events $A$ and $B$, $A$ and $B$ are independent if $\PP{A\cap B}=\PP{A}\PP{B}$.
+
+The family of events $\{A_i,i\in I\}$ where $I$ is an index set; is independent if\[\PP{\bigcap_{i\in J} A_i}=\prod_{i\in J} \PP{A_i}\text{ for all finite subsets } J\in I\]
+
+A family $\{A_i, i\in I\}$ is pairwise independent if $\PP{A_i, i \in I)=\mathbb{P}(A_i)\mathbb{P}(A_j},\forall i\neq j$.  Pairwise independence does not imply independence.
+
+{\small Note: for the independent events $A$ and $B$, knowing $\PP{A}$ does not imply knowledge of $\PP{B}$}
+
+For a pair of discrete random variables $X$ and $Y$ on the same probability space, they are inde3pendent if $\PP{X=x,Y=y}=\PP{X=x}\PP{Y=y},\forall x,y\in\setreal$. i.e., $X$ and $Y$ are independent iff $\{X=x\}\text{ and }\{Y=y\}$ are independent events \emph{for all} choices of $x,y\in\setreal$
+\subsection{Discrete Random Variables}
+A discrete random variable $X$ on a probability space $(\Omega,\FF,\mathbb{P})$ is simply a function $X:\Omega\to\setreal$ with the properties that:
+\begin{itemize*}
+\item $\image(X)=\{X(\omega):\omega\in\Omega\}$ is a finite or countably infinite subset of $\setreal$. i.e. $\image(X)$ can be written as $\{x_0,x_1,x_2\ldots\}$.  Usually $\image(X)$ will be $\mathbb{N}$ or a subset of $\mathbb{N}$.
+\item $\{\omega\in\Omega:X(\omega)=x\}\in\mathcal{F}\text{ for each }x\in\setreal$.  This says that if $\{\omega\in\Omega:X(\omega)=x\}$ is an event then we can assign a probability to it. $\{\omega\in\Omega:X(\omega)=x\}$ is usually abbreviated to $\{X=x\}$. $\PP{X=x}$ is used as a shorthand for $\PP{\{\omega\in\Omega:X(\omega)=x\}}$
+\item Let $f:\setreal\to\setreal$, then if $X$ is a discrete random variable, then $Y:=f\left(X\right)$ is also a discrete random variable.  If $\image(X)=\{x_1,x_2,\ldots\}$ then $\image\left(f\left(x\right)\right)=\{f\left(x_1\right),f\left(x_2\right),\ldots\}$.
+\end{itemize*}
+\subsection{Probability Mass Function}
+The probability mass function of a discrete random variable $X$ is the function $p_X:\setreal\to\left[0,1\right]$ defined by $p_X(x)=\PP{X=x}$.  If $x\not\in\image(X)$ then $p_X(x)=\PP{X=x)=\mathbb{P}(\emptyset}=0$.  Also if $\image(X)=\{x_0,x_1,\ldots\}$ then 
+\begin{align*}
+\sum_{\mathclap{i\in\image(X)}}p_X(x)&=\sum_{i\ge0}p_X(x_i)\\
+&=\sum_{i\ge0}\PP{\{\omega\in\Omega:X(\omega)=x_i\}}\\
+\intertext{events are disjoint}&=\PP{\bigcup_{i\ge0}\{\omega\in\Omega:X(\omega)=x_i\}}\\
+\intertext{every event in $\Omega$ mapped to $x_0,x_1,\ldots$}&=\PP{\Omega}\\
+\intertext{By \eqref{p1}}&=1
+\end{align*}
+\subsection{Classical Distributions}
+\subsubsection{Bernoulli Distribution}$X$ has the Bernoulli Distribution with parameter $p$, where $p\in\left[0,1\right]$ if $\PP{X=0}=1-p$ and $\PP{X=1}=p$.  As $1-p+p=1$, $X$ can only take the values $0$ and $1$.  $p_X(0)=1-p$ and $p_X(1)=p$.  $\mathbbm{1}_A$ (the indicator function of $A$) is an example of a Bernoulli random variable with $p=\PP{A}$, constructed on an explicit probability space.  We write $X\sim\mathrm{Ber}(p)$ to indicate a discrete random variable $X$ modelled by $\mathrm{Ber}(p)$.  Can be used to model flipping a (possibly unfair) coin.
+\subsubsection{Binomial Distribution}$X$ has a binomial distribution with parameters $n$ and $p$, where $n\in\mathbb{Z},p\in\left[0,1\right]$ if $\PP{X=k}=\binom{n}{k}p^k(1-p)^{n-k}$ for some constant $k$ where $0\le k\le n$.  We write $X\sim\mathrm{Bin}(n,p)$. For example, the number of heads from $n$ independent trials where $\PP{\{\text{heads}\}}=p$
+\subsubsection{Geometric Distribution}$X$ has a geometric distribution with parameter $p\in\left[0,1\right]$ if $\PP{X=k}=(1-p)^{k-1}p,k\in\mathbb{Z}$. We write $X\sim\mathrm{Geom}(p)$.  It is used to model the number of independent trials needed until the first success occurs, where $\PP{\{\text{success}\}}=p$
+\subsubsection*{Alternative Geometric Distribution}Is used to model the number of failures before first success.  $\PP{Y=k}=(1-p)^kp,k\ge0$
+\subsubsection{Poisson Distribution}$X$ has a Poisson distribution with parameter $\lambda\ge0,\lambda\in\setreal$ if $\PP{X=k}=e^{-\lambda}\frac{\lambda^k}{k!}$, $k\in\mathbb{Z}_0$.  We write this as $X\sim\mathrm{Po}(\lambda)$ and is used to model events occuring at a constant average rate $\lambda$.
+\subsection{Expectation}
+The expectation (or mean) of a variable $X$ is \[\EE{X}=\sum_{\mathclap{x\in\image X}}x\PP{X=x}\]provided that $\sum_{x\in\image X}\left|x\right|\PP{X=x}<\infty$.  If $\EE X$ diverges, then it does not exist.
+\subsection{Moments}
+The $k^\text{th}$ moment of a variable $X$ is $m_k(X)=\EE{X^k}$ given that it exists.
+\subsection{Joint Distributions}
+Suppose we consider the discrete random variables $X$ and $Y$ on the same probability space. In order to under stand the distribution of this pair, we must specify $\PP{\{X=x\}\cap\{Y=y\}}$ \emph{for all} $x,y\in\setreal$.  It is not enough to specify $\PP{X=x}$ and $\PP{Y=y}$ as $X$ and $Y$ may not be independent.
+\subsection{Joint Probability Mass Function}The joint probability mass function of $X$ and $Y$ is given by $P_{X,Y}(x,y)=\PP{X=x,Y=y}$.  $P_{X,Y}(x,y)>0,\forall x,y\in\setreal$ and $\sum_x\sum_yp_{X,Y}(x,y)=1$.
+\subsection{Marginal Distribution}The marginal distribution of $X$ is $p_X(x)=\PP{X=x}=\sum_yp_{X,Y}(x,y)$. Similarly for $Y$, the marginal distribution is given as $\sum_xp_{X,Y}(x,y)$.
+\subsection{Covariance}Given $X$ and $Y$ \emph{not} independent, their covariance is $\cov(X,Y)=\EE{(X-\EE X)(Y-\EE Y)}$.  It is therefore easy to see that $\cov(X,X)=\var(X)$.  If two variables are independent (hence $\EE{XY}=\EE X\EE Y$) then $\cov(X,Y)=0$.   However, the reverse is not true.
+\end{multicols}
+\subsection{Multivariate Joint Distributions}By extending the principal of joints distributions, $p_{X_1,X_2,\ldots,X_k}(x_1,x_2,\ldots)=\PP{X_1=x_1,X_2=x_2,\ldots,X_k=x_k}$ for $x_1,x_2,\ldots,x_n\in\setreal$
+\subsection{Multivariate Independence}A family $\{X_i:i\in I\}$ of random variables is independent for all finite subsets of $J\subseteq I$ and all collections $\{x_i:i\in J\}$ if \[\PP{\bigcap_{i\in J}\{X_i=x_i\}}=\prod_{i\in J}\PP{X_i=x_i}\]
+\subsection{Variance}The variance of a variable is the measure of spread around its mean.
+For a discrete random variable $X$, its variance is defined by: \(\var(X)=\EE {X-\EE{X^2}}\) when $\EE{X}$ exists.  This can also be re-written as $\EE{f(X)}$ for $f(X)=\left(X-\EE{X}\right)^2$, $\EE{X}\in\setreal, f:\setreal\to\setreal$. Since $f(X)\ge0$, $\var(X)\ge0$.  By letting $\mu=\EE X$ and substitute in $f(X)=\left(X-\mu\right)^2$.  The standard deviation is often preferred as a measure of spread as it preserves linearity when scaling.
+\begin{align*}
+\var(X)&=\EE{X^2-2\mu X+\mu^2}\\
+&=\sum_{x\in\image X}\left(x^2-2\mu x+\mu^2\right)p_X(x)\\
+&=\sum_{x\in\image X}x^2p_X(x)-2\mu\sum_{x\in\image X}xp_X(x)+\mu^2\sum_{x\in\image X}p_X(x)\\
+&=\EE{X^2}-2\mu\EE X+\mu^2\\
+\overset{\mu=\EE{X}}{\Rightarrow}&=\EE{X^2}-\EE{X}^2
+\end{align*}
+\section{Axioms}
+\begin{itemize*}
+\item\begin{equation}\tag{F$_1$}\label{f1}
+\emptyset\in\FF,\Omega\in\FF
+\end{equation}
+The empty set and the sample space are both in the list of possible outcomes. i.e. nothing happens, or something happens.
+\item\begin{equation}\tag{F$_2$}\label{f2}
+\text{If }A,B\in\FF\text{, then }A^c\in\FF\text{ and }A\cup B\in \FF
+\end{equation}
+For any set in the set of possible outcomes, its complement is in the list of outcomes.
+For any two sets in the set of possible outcomes, their unison is in the list of outcomes.
+\item\begin{equation}\tag{F$_3$}\label{f3}
+\text{If }A_i\in\FF\text{ for }i\ge1\text{, then }\bigcup^\infty_{i=1}A_i\in\FF
+\end{equation}
+For any list of sets in the set of possible outcomes, the union of the list of sets is a possible outcome.
+\item\begin{equation}\tag{P$_1$}\label{p1}
+\forall A\in\FF, \PP{A}\ge0 
+\end{equation}
+Any outcome in the list of possible outcomes has a chance of occuring (probability of greater than 0) or no chance of occuring (probability of 0)
+\item\begin{equation}\tag{P$_2$}\label{p2}
+\PP{\Omega}=1
+\end{equation}
+The probability of any outcome occurring is 1. (Something will always happen)
+\item\begin{equation}\tag{P$_3$}\label{p3}
+\text{If }A,B\in\FF\text{ and }A\cap B=\emptyset\text{ then }\PP{A\cup B}=\PP{A}+\PP{B}
+\end{equation}
+If two sets of outcomes are disjoint (mutually exclusive), then the probability of either is the sum of their individual probabilities.
+\item\begin{equation}\tag{P$_4$}\label{p4}
+\text{If }A_i\in\FF\text{ for }i\ge1\text{ and }A_i\cap A_j=\emptyset\text{ for }i\neq j\text{ then }\mathbb{P}\left(\bigcup_{i=1}^\infty A_i\right)=\sum_{i=1}^\infty \mathbb{P}\left(A_i\right)
+\end{equation}
+For a set of mutually exlusive events, the probability of any one happening is the same as the sum of all the individual events.
+\end{itemize*}
+\section{Theorems}
+Let $(\Omega,\FF,\mathbb{P})$ be a probability space.
+\begin{itemize*}
+\item Let $X$ be a discrete random variable such that $\EE{X}$ exists.  
+\begin{itemize*}
+\item If $X$ is non-negative, then so is $\EE{X}$
+\item For $a,b\in\setreal$, $\EE{aX+b}=a\EE{X}+b$
+\end{itemize*}
+\begin{itemize*}
+\item\begin{proof}
+$\image X\subseteq\left[0,\infty\right)$ so $\sum_{x\in\image X}x\PP{X=x}$ is a sum whose terms are all non-negative, which must give a non-negative solution.
+\end{proof}
+\item\begin{proof}
+Let $f(X)=aX+b$.  Then \begin{align*}
+\sum_{x\in\image X}(ax+b)\PP{f(X)=ax+b}&=\sum_{x\in\image X}ax\PP{f(X)=ax+b}\\
+&{}+\sum_{x\in\image X}b\PP{f(X)=ax+b}\\
+&=a\sum_{x\in\image X}x\PP{f(X)=aX+b}+b\\
+&=a\EE{X}+b
+\end{align*}
+\end{proof}
+\end{itemize*}
+\begin{multicols}{2}
+\item $\mathbb{P}(A^c)=1-\PP{A}$
+\begin{proof}
+\begin{align*}
+A\cup A^c=\Omega\text{ and }&A \cap A^c = \emptyset\\
+\text{By \eqref{p3} }\Rightarrow\PP{\Omega} &= \PP{A}+\mathbb{P}(A^c)\\
+\text{By \eqref{p2} }\Rightarrow1&=\PP{A}+\mathbb{P}(A^c)\\
+\Rightarrow\mathbb{P}(A^c)&=1-\PP{A}
+\end{align*}
+\end{proof}
+\item If $A\subseteq B\Rightarrow \PP{A)\le\mathbb{P}(B}$
+\begin{proof}
+Since $A\subseteq B, B=A\cup\left(B\cap A^c\right)\text{. Since }B\cap A^c\subseteq A^c$, it must be disjoint from $A$.  So by \eqref{p3}, $\PP{B)=\mathbb{P}(A}+\mathbb{P}(B\cap A^c)$.
+Since by \eqref{p1}, $\mathbb{P}(B\cap A^c)\ge 0$, we thus have $\PP{B)\ge\mathbb{P}(A}$.
+\end{proof}
+\item Suppose $\PP{B}>0$.  Define the new function $\mathbb{Q} : \FF \to \setreal$ then $\mathbb{Q}(A)=\PP{A|B}$.  Then $(\Omega, \FF, \mathbb{Q})$ is also a probability space.
+\begin{proof}
+We only need to check that $\mathbb{Q}$ satisfies \eqref{p1} to \eqref{p4} as we are using the same $\FF$.
+\eqref{p1}\[\mathbb{Q}(A)=\frac{\PP{A\cap B}}{\PP{B}}\ge0\]
+\eqref{p2}\[\mathbb{Q}(\Omega)=\frac{\PP{\Omega\cap B}}{\PP{B}}=\frac{\PP{B}}{\PP{B}}\]
+\eqref{p3} and \eqref{p4} have the same proof, so we just do \eqref{p4}: For disjoint events $A_1, A_2,\ldots,$
+\begin{align*}
+\mathbb{Q}\left(\bigcup_{i=1}^\infty A_i\right)&=\frac{\mathbb{P}\left(\left(\bigcup_{i=1}^\infty A_i\right)\cap B\right)}{\PP{B}}\\
+&=\frac{\mathbb{P}\left(\bigcup_{i=1}^\infty\left( A_i\cap B\right)\right)}{\PP{B}}\\
+\intertext{(because $A_i\cap B, i\ge 1$, are disjoint)}
+&=\frac{\sum_{i=1}^\infty\mathbb{P}\left(A_i\cap B\right)}{\PP{B}}\\
+&=\sum_{i=1}^\infty\mathbb{Q}(A_i)
+\end{align*}
+\end{proof}
+\item {\bf Law of Total Probability or Partition Theorem}  If $\{B_1,B_2\ldots\}$ if a partitions of $\Omega$ such that $\mathbb{P}\left(B_i\right)>0,\forall i\ge1$ then $\PP{A}=\sum_{i\ge1}\PP{A|B_i}\PP{B_i}$
+\begin{proof}
+\begin{align*}
+\PP{A}&=\PP{A\cap\Omega}\\
+\intertext{Since $\bigcup_{i\ge1}B_i=\Omega$}&=\PP{A\cap\bigcup_{i\ge1}B_i}\\
+&=\PP{\bigcup_{i\ge1}\left(B_i\cap A\right)}\\
+\intertext{As $A\cap B_i=\emptyset\text{ for }i\ge1$, then by \eqref{p4}}&=\sum_{i\ge1}\PP{A\cap B_i}\\
+\intertext{Through application of the multiplication rule}&=\sum_{i\ge1}\PP{A\cap B_i}\PP{B_i}
+\end{align*}
+\end{proof}
+\item If $A$ and $B$ are independent, then so are the events $A$ and $B^c$, as well as $A^c$ and $B^c$.
+\begin{proof}
+$A=(A\cap B)\cup(A\cap B^c)$ and $(A\cap B)\cap(A\cap B^c)=\emptyset$.  So, by \eqref{p3}:
+\begin{align*}
+\PP{A\cap B^c}&=\PP{A}-\PP{A\cap B}\\
+&=\PP A\left(1-\PP B\right)\\
+&=\PP A \PP{B^c}
+\end{align*}
+\end{proof}
+\begin{proof}
+Apply above to the events $B^c$ and $A$
+\end{proof}
+\item{\bf Bayes' Theorem}  Suppose that $\{B_1,B_2,\ldots\}$ is a partition of $\Omega$ and $\PP{B_i}>0, \forall i\ge1$.  Also that $\PP A>0$.  Then
+\[\PP{B_k\mid A}=\frac{\PP{A\mid B_k}\PP{B_k}}{\sum_{i\ge1}\PP{A\mid B_i}\PP{B_i}}\]
+\begin{proof}
+\begin{align*}
+\PP{B_k\mid A}&=\frac{\PP{B_k\cap A}}{\PP A}\\
+&=\frac{\PP{A\mid B_k}\PP{B_k}}{\PP A}\\
+\intertext{By applying the partition theorem for $\PP A$}
+&=\frac{\PP{A\mid B_k}\PP{B_k}}{\sum_{i\ge1}\PP{A\mid B_i}\PP{B_i}}
+\end{align*}
+\end{proof}
+\item If $f:\setreal\to\setreal$ then $\EE{f\left(X\right)=\sum_{x\in\image X}f(x)\PP{X=x}}$ if $\sum_{x\in\image X}\left|f(x)\right|\PP{X=x}<\infty$
+\begin{proof}
+Let $A=\{y:y=f(x)\text{ for some }x\in\image X\}$.  Then 
+\begin{align*}
+\sum_{x\in\image X}f(x)\PP{X=x}&=\sum_{y\in A}\left(\sum_{\substack{x\in\image X\\y=f(x)}}f(x)\PP{X=x}\right)\\
+&=\sum_{y\in A}y\sum_{\substack{x\in\image X\\y=f(x)}}\PP{X=x}\\
+&=\sum_{y\in A}y\PP{f(X)=y}\\
+&=\EE{f(X)}
+\end{align*}
+\end{proof}
+\item For $a,b\in\setreal,\var(aX+b)=a^2\var(X)$
+\begin{proof}
+\begin{align*}
+\var(X)&=\EE{X^2}-\EE X^2\\
+\var(aX+b)&=\EE{\left(aX+b\right)^2}-\EE{aX+b}^2\\
+&=\EE{a^2X^2+2bX+b^2}-a^2\EE X^2-2\EE X+b^2\\
+&=\sum_x\left(a^2x^2 + 2bx +b^2\right)-a^2\EE X^2-2\EE X+b^2\\
+&=\sum_x\left(a^2x^2\right)+2b\EE X-2b\EE X+b^2-b^2\\
+&=a^2\EE{X^2}-a^2\EE X^2\\
+&=a^2\var(X)
+\end{align*}
+\end{proof}
+\item{\bf Law of Total Probability for Expectations}  If $\{B_1,B_2,\ldots\}$ is a partition of $\Omega$ such that $\PP{B_i}>0\forall i$, then $\EE X=\sum_{i\ge1}\EE{X\mid B_i}\PP{B_i}$ whenever $\EE X$ exists.
+\begin{proof}
+\begin{align*}
+\EE X &=\sum_xx\PP{X=x}\\
+&=\sum_xx\sum_{i\ge1}\PP{X=x\mid B_i}\PP{B_i}\\
+&=\sum_x\sum_{i\ge1}x\PP{X=x\mid B_i}\PP{B_i}\\
+&=\sum_{i\ge1}\PP{B_i}\sum_xx\PP{X=x\mid B_i}\\
+&=\sum_{i\ge1}\PP{B_i}\EE{X\mid B_i}
+\end{align*}
+\end{proof}
+\item{\bf Linearity of $\mathbb{E}$}  Given the constants $a,b\in\setreal$, then $\EE{aX+bY}=a\EE X+b\EE Y$ whenever $\EE X$ and $\EE Y$ exist.
+\begin{proof}
+Let $f(X,Y)=aX+bY$
+\begin{align*}
+&\Rightarrow\sum_x\sum_y(ax+by)p_{X,Y}(x,y)\\
+&=a\sum_x\sum_yxp_{X,Y}(x,y)+b\sum_x\sum_yyp_{X,Y}(x,y)\\
+&=a\sum_xxp_{X,Y}(x,y)+b\sum_yyp_{X,Y}(x,y)\\
+&=a\EE X+b\EE Y
+\end{align*}
+\end{proof}
+\item If $X$ and $Y$ are independent, then $\EE{X,Y}=\EE X\EE Y$
+\begin{proof}
+\begin{align*}
+\EE{X,Y}&=\sum_x\sum_yxyp_{X,Y}(x,y)\\
+\intertext{As $X$ and $Y$ are independent}&=\sum_x\sum_yp_X(x)p_y(Y)\\
+&=\sum_xxP_X(x)\sum_yyp_Y(y)\\
+&=\EE X\EE Y
+\end{align*}
+\end{proof}
+\end{multicols}
+\item For the independent variables $X$ and $Y$, $\var(X+Y)=var(X)+var(Y)$
+\begin{proof}Let $\mu=\EE X$ and $\lambda=\EE Y$
+\begin{align*}
+\var(X+Y)&=\EE{(X+Y-\mu-\lambda)^2}\\
+&=\EE{\lambda ^2+2 \lambda  \mu +\mu ^2+X^2-2 \lambda  X-2 \mu  X+2 X Y+Y^2-2 \lambda  Y-2 \mu  Y}\\
+&=\sum_x\sum_y\left(\lambda ^2+2 \lambda  \mu +\mu ^2+X^2-2 \lambda  X-2 \mu  X+2 X Y+Y^2-2 \lambda  Y-2 \mu  Y\right)p_{X,Y}(x,y)\\
+&=\sum_x\left(X^2 - 2\lambda X-2 \mu  X\right)p_{X,Y}(x,y)+\sum_x\sum_y2 X Yp_{X,Y}(x,y)\\&+\sum_y\left(Y^2-2 \lambda  Y-2 \mu  Y\right)p_{X,Y}(x,y)+\mu^2+\lambda^2+2\lambda\mu\\
+&=\EE{X^2}-\EE X^2+\EE {Y}^2-\EE Y^2\\
+&=\var(X)+\var(Y)
+\end{align*}
+\end{proof}
+\end{itemize*}
+\end{document}

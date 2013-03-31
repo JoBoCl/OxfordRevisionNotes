@@ -1,0 +1,465 @@
+\documentclass[10pt]{article}
+\title{Design and Analysis of Algorithms}
+\author{}\date{}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ruled,noline,noend,linesnumbered]{algorithm2e}
+\usepackage{amsmath,amssymb}
+\usepackage[floats,charwidths,indent,lists,title,sections,margins]{savetrees}
+\usepackage{mdwlist}
+\usepackage{mathtools}
+\usepackage{listings}
+\lstloadlanguages{Haskell}
+\lstnewenvironment{codeh}
+    {\lstset{}%
+      \csname lst@SetFirstLabel\endcsname}
+    {\csname lst@SaveFirstLabel\endcsname}
+    \lstset{
+      basicstyle=\small\ttfamily,
+      flexiblecolumns=false,
+      breaklines,
+      basewidth={0.5em,0.45em},
+      literate={+}{{$+$}}1 {/}{{$/$}}1 {*}{{$*$}}1 {=}{{$=$}}1
+               {>}{{$>$}}1 {<}{{$<$}}1 {\\}{{$\lambda$}}1
+               {\\\\}{{\char`\\\char`\\}}1
+               {->}{{$\rightarrow$}}2 {>=}{{$\geq$}}2 {<-}{{$\leftarrow$}}2
+               {<=}{{$\leq$}}2 {=>}{{$\Rightarrow$}}2 
+               {\ .}{{$\circ$}}2 {\ .\ }{{$\circ$}}2
+               {>>}{{>>}}2 {>>=}{{>>=}}2
+               {|}{{$\mid$}}1               
+    }
+\usepackage{hyperref}
+\begin{document}
+\twocolumn
+\maketitle
+\tableofcontents
+\listofalgorithms
+\section{Design Principles}
+\subsection{Divide and Conquer}
+The divide-and-conquer strategy can be thought of as solving problems in the following steps:
+\begin{enumerate*}
+\item Break the initial problem into subproblems.
+\item Recursively solve the subproblems [if the problems are small enough, solve by brute force for a \emph{base case}].
+\item Appropriately combine the answers to the subproblems.
+\end{enumerate*}
+The most complicate work is found in dividing the problems into the subproblems, at the tail-end of the recursion, when solving the subproblems, and gluing the intermediate answers together.
+\subsubsection{Merge Sort}
+\paragraph{Description}
+This is a divide-and-conquer algorithm to sort the array $A\left[p..r\right)$.
+\begin{enumerate*}
+\item \emph{Divide} -- split the array into $A\left[p..q\right)$ and $A\left[q..r\right)$, where $q=\lfloor(p+q)/2\rfloor$.
+\item \emph{Conquer} -- by recursively sorting the subarrays, and bottoming out the recursion when singleton arrays are reached.
+\item \emph{Combine} -- by merging the sorted subarrays $A\left[p..q\right)$ and $A\left[q..r\right)$ using a $\Theta(n)$ procedure.
+\end{enumerate*}
+\paragraph{Pseudo-code}
+\begin{algorithm}[!htp]
+\caption{Merge Sort}
+\SetAlFnt{\small}
+\SetKwProg{Fn}{def}{}{}
+\SetKwFunction{MERGESORT}{MERGE-SORT}
+\SetKwFunction{MERGE}{MERGE}
+\Fn{\MERGESORT$(A,p,r)$}{
+	\KwIn{An integer array $A$ with indices $p<r$}
+	\KwOut{The subarray $A[p..r)$ sorted in increasing order}
+	\If{$p+1<r$}{
+	$q=\lfloor(p+r)/2\rfloor$\;
+	\MERGESORT$(A,p,q)$\;
+	\MERGESORT$(A,q,r)$\;
+	\MERGE$(A,p,q,r)$\;}
+}
+\setcounter{AlgoLine}{0}
+\BlankLine
+\Fn{\MERGE$(A,p,q,r)$}{
+	\KwIn{Array $A$ with indices $p,q,r$ such that $p<q<r$ and subarrays $A[p..q)$ and $A[q..r)$ already sorted.}
+	\KwOut{The subarrays are merged into a sorted array $A[p..r)$}
+	$n_1=q-p$, $n_2=r-q$\;
+	Create array $L$ of size $n_1+1$, Create array $R$ of size $n_2+1$\;
+	\lFor{$i=0$ \KwTo$n_1-1$}{$L[i]=A[p+i]$}
+	\lFor{$j=0$ \KwTo$n_2-1$}{$R[j]=A[q+j]$}
+	$L[n_1]=\infty$, $R[n_2]=\infty$\;
+	$i=0$, $j=0$\;
+	\For{$k=p$ \KwTo$r-1$}{
+		\leIf{$L[i]\le R[j]$\tcc{To ensure stable sort}}{$A[k]=L[i]$;$i=i+1$\;}{$A[k]=R[j]$;$j=j+1$}
+		}
+		\KwRet{A}\;
+	}
+\end{algorithm}
+\texttt{MERGE} runs in $\Theta(n)$ as each of the \texttt{for} loops' lines run in constant time, iterating over $n$ elements, therefore the entire function is bounded by $n$.
+\paragraph{Advantages}
+\begin{itemize*}
+\item Merge sort is stable, as the \texttt{MERGE} function is left biased.
+\item Runtime is always $O(n\log n)$.
+\end{itemize*}
+\paragraph{Disadvantages}
+\begin{itemize*}
+\item Merge, and by extension, merge sort requires $O(n)$ extra space.
+\item Merge sort is not an online algorithm.
+\end{itemize*}
+\paragraph{Haskell Implementation}
+By pattern matching, first against the base cases, the program then recurses into two more calls of mergesort using two separate halves of the list.  The call to merge then ensure that the two halves of the list are joined into a correctly sorted list.
+\begin{code}
+mergesort :: Ord a => [a] -> [a]
+mergesort [] = []
+mergesort [x] = [x]
+mergesort xs = merge (mergesort xs1) (mergesort xs2)
+	where (xs1,xs2) = split xs
+
+split :: [a] -> ([a],[a])
+split (x:y:zs) = (x:xs,y:ys) where (xs,ys) = split zs
+split xs = (xs,[])
+
+merge :: [a] -> [a] -> [a]
+merge xs [] = xs
+merge [] ys = ys
+merge (x:xs) (y:ys) = 
+  case x <= y of
+	True -> x : merge xs (y:ys)
+	False -> y : merge (x:xs) ys
+\end{code}
+\subsubsection{Binary Search}
+\paragraph{Description and Requirements}
+\begin{itemize*}
+\item The array to work with is sorted
+\item Begin by looking at the middle element.  If the item to be found is less than the middle element, discard the latter half of the list, else discard the first half.
+\item Recursively look for the element until a singleton is reached.  If this is the element, then return true/index of element, else return false/sensible error variable.
+\end{itemize*}
+\begin{algorithm}
+\caption{Binary Search}
+\KwIn{Array $A$ of distinct increasing integers, and an integer $z$}
+\KwOut{``Yes'' if $z\in A$, ``No'' otherwise}
+\SetKwProg{Fn}{def}{}{}
+\SetKwFunction{BINS}{BIN-SEARCH}
+\Fn{\BINS$(A,p,r,z)$}{
+\eIf{$p\ge r$}{\KwRet{``No''}}
+{
+	$q=\lfloor(p+q)/2\rfloor$\;
+	\eIf{$z=A[q]$}{\KwRet{``Yes''}}{\eIf{$z<A[q]$}{\BINS{$A,p,q,z$}\;}{\BINS{$A,q+1,r,z$}\;}}
+	}
+}
+\end{algorithm}
+\paragraph{Running time}Let $T(n)$ be the worst-case time, therefore \[T(n)=\begin{cases}O(1)&\text{ if }n=1\\T\left(\lfloor n/2\rfloor\right)+O(1)&\text{otherwise}\end{cases}\] By the Master Theorem, $T(n)=O(\log n)$.  By looking at the ``decision tree'' of the binary search, it is clear that binary search is $\Omega(\log n)$, therefore, $T(n)\in\Theta(\log n)$.
+\subsubsection{Selection Problem}
+The $i^\text{th}$ ordered statistic of a set of $n$ distinct elements is the element that is larger than exactly $i-1$ other elements.
+
+Upper-bound time: $O(n\log n)$ -- sort the array in $O(n\log n)$ time and return the $i^\text{th}$ element.
+
+It is possible to do so in worst case $O(n)$ time.
+
+By partitioning the array, it is possible to recursively solve the above problem.
+\begin{algorithm}
+	\caption{Partition algorithm}
+	\KwIn{An array $A$ of distinct numbers, with indices $p\le q<r$ and $m=A[q]$ as the pivot}
+	\KwOut{An index $q'$ with $p\le q'\le r$ such that $A[p..r)$ is a permutation of $A$, $\forall a \in A[p..q') \Rightarrow a<m\,\wedge\,\forall a\in A[q'..r)\Rightarrow a\ge m\,\wedge\,A[q']=m$.}
+\end{algorithm}
+\begin{algorithm}
+	\caption{Selection Algorithm}
+	\SetKwFunction{SEL}{SELECT}
+	\KwIn{An array $A$ of distinct numbers and the $i^\text{th}$ order statistic to find}
+	\KwOut{The $i^\text{th}$ smallest element}
+	Divide the $n$ input elements into groups of 5, with one group of $n\mod 5$ elements\;
+	Find the median of the first $\lfloor n/5\rfloor$ groups in $O(1)$\;
+	Find the median-of-medians $x$ by calling select recursively\;
+	Partition the input array around $x$, with the lower partition having $k-1$ elements\;
+	\lIf{$i=k$}{\KwRet{$x$}}
+	\Else{
+	\lIf{$i<k$}{\SEL{$A[0..k),i$}}\lElse{\SEL{$A[k+1..n),i-k$}}
+	}
+\end{algorithm}
+
+Steps 1,2, and 4 take $O(n)$ time.
+
+The number of elements $\le x$ is, at least $3\left(\lceil\frac12\lfloor\frac n5\rfloor\rceil\right)\ge\lceil\frac{3n}{10}\rceil-2$.
+Thus, in the worst case, \texttt{SELECT} is called on, at most $\lfloor 7n/10\rfloor+2$ elements, so \[T(n)\le T(\lfloor n/5\rfloor)+T(\lfloor7n/10\rfloor+2)+cn\]for some constant $c\in\mathbb R$.
+
+By supposing that $T(n)\in O(n)$, and then substituting $bn$ in for $T(n)$, for $b\ge 10cn/(n-20)$, $T(n)\le cn$ else $T(n)\in O(1)$.
+\subsubsection{Integer Multiplication}
+By using an observation of Gauss', that is $(a+bi)(c+di)=ac-bd+(bc+ad)i$ can be done using just three multiplication operations ($ac$, $bd$, and $(a+b)(c+d)$), integer multiplication can then be performed much more efficiently.  By splitting $n$-bit numbers $x$ and $y$ into left and right halves, each $n/2$ bits long, it is therefore possible to compute 
+\begin{align*}
+	xy&=\left(2^{n/2}x_L+x_R\right)\left(2^{n/2}y_L+y_R\right)\\
+	&=2^nx_Ly_L+2^{n/2}\left(x_Ly_R+x_Ry_L\right) + x_Ry_R
+\end{align*}
+Multiplication by $2^n$ can be implemented as a left-shift in constant time, and addition in linear time, giving the time $T(n)$ to multiply two $n$-bit numbers as \[T(n)=4T(n/2)+O(n)\]which, by the Master Theorem, gives $T(n)\in O(n^2)$.
+
+By using Gauss' trick, and re-writing as $x_Ly_L$, $x_Ry_R$ and $(x_L+x_R)(y_L+y_R)$, the running time becomes \[T(n)=3T(n/2)+O(n)\]Again, by the Master Theorem, $T(n)\in\left(n^{\log_23}\right)\approx O\left(n^{1.59\ldots}\right)$.
+\subsubsection{Matrix Multiplication}
+Multiplying the $p\times q$ matrix $X$ by the $q\times r$ matrix $Y$ gives \[Z_{ij}=\sum_{k=1}^qX_{ik}\cdot Y_{kj}\]The above requires $p\times q\times r$ multiplications and $p\times(q-1)\times r$ additions.  When $p=q=r=n$, there are $2n^3-n^2\in O(n^3)$ operations.  
+
+By dividing $X$ and $Y$ into quarters, \[XY=\left[\begin{matrix}A&B\\C&D\end{matrix}\right]\left[\begin{matrix}E&F\\G&H\end{matrix}\right]=\left[\begin{matrix}AE+BG&AF+BH\\CE+DG&CF+DH\end{matrix}\right]\]It is then possible to recursively multiply the smaller matrices, and then add the individual elements in $O(n^2)$ time, giving a total running time of $T(n)=8T(n/2)+O(n^2)$, which, by the Master Theorem, is $O(n^3)$.
+
+By observing (similarly to Gauss) that \[XY=\left[\begin{matrix}P_5+P_4-P_2+P_6&P_1+P_2\\P_3+P_4&P_1+P_5-P_3-P_7\end{matrix}\right]\]where
+	\begin{align*}
+		P_1&=A(F-H)&P_5&=(A+D)(E+H)\\
+		P_2&=(A+B)H&P_6&=(B-D(G+H)\\
+		P_3&=(C+D)E&P_7&=(A-C)(E+F)\\
+		P_4&=D(G-E)&&
+	\end{align*}
+	Thus giving seven multiplications, hence $T(n)=7T(n/2)+O(n^2)\Rightarrow T(n)\in O\left(n^{\log_27}\right)\approx O\left(n^{2.81}\right)$.
+\subsection{Dynamic Programming}
+By identifying and solving a collection of smaller subproblems, and initial problem can be solved by using the solution to the smaller problems in building up a complete solutions.  Dynamic programming is not suited to solving all problems, as the solutions to the subproblems are not necessarily \emph{compositional}, i.e. the optimal solution is not formed from a composite of the solutions of the subproblems.
+
+Dynamic programming is only applicable when the \emph{Principle of Optimality} is satisfied: ``The optimal solution to a problem is a composite of optimal solutions to (some of) its subproblems''.
+\subsubsection{Knapsack Problems with Repetition}
+For the $n$ items, each of weight $w_1,w_2\ldots w_n$ and value $v_1,v_2, \ldots v_n$ respectively, and a maximum carrying capacity of $W$ find the maximum possible value to carry without the total weight exceeding $W$.
+Define $K[w]$ to be the maximum achievable value with weight limit $w$.  The solution to the problem is therefore \[K[w] = \max\left\{K\left[w-w_i\right]+v_i:w_i\le w\right\}\] where $K[W]$ is the desired answer.
+\begin{algorithm}
+\caption{Knapsack Problem with repetition}
+\KwIn{List of weights $\{w_1,w_2,\ldots,w_n\}$ and respective values $\{v_1,v_2,\ldots,v_n\}$, and maximum weight $W$}
+\KwOut{Maximum value of items}
+$K[0]=0$\;
+\lFor{$w=1$ \KwTo$W$}{$K[w] = \max\left\{K\left[w-w_i\right]+v_i:w_i\le w\right\}$}
+\KwRet{$K[W]$}\;
+\end{algorithm}
+
+The above fills an one-dimensional array of length $W+1$, each entry taking $O(n)$ time, hence the total running time of the algorithm is $O(nW)$.
+\subsubsection{Knapsack Problems without Repetition}
+For the $n$ items, each of weight $w_1,w_2\ldots w_n$ and value $v_1,v_2, \ldots v_n$ respectively, and a maximum carrying capacity of $W$ find the maximum possible value to carry without the total weight exceeding $W$, and with all items being distinct.
+Define $K[w,]$ to be the maximum achievable value with weight limit $w$, choosing from items $1,2\ldots j$, as $j$ varies between $0\le j \le n$.  The solution to the problem is therefore \[K[w,j] = \max\left\{K[w-w_j,j-1]+v_j, K[w,j-1]\right\}\]where $K[W,n]$ is the desired answer.
+\begin{algorithm}
+\caption{Knapsack Problem without repetition}
+\KwIn{List of weights $\{w_1,w_2,\ldots,w_n\}$ and respective values $\{v_1,v_2,\ldots,v_n\}$, and maximum weight $W$}
+\KwOut{Maximum value of items}
+\lFor{$j=0$ \KwTo$n$}{ $K[0,j]=0$}
+\lFor{$w=0$ \KwTo$W$}{ $K[w,0]=0$}
+\For{$j=1$ \KwTo$n$}{ 
+	\For{$w=1$ \KwTo$W$}{
+		\eIf{$w_j>w$}{$K[w,j]=K[w,j-1]$\;}{$K[w] = \max\left\{K\left[w-w_i\right]+v_i:w_i\le w\right\}\;$}
+	}
+}
+\KwRet{$K[W,n]$}\;
+\end{algorithm}
+
+The above fills an one-dimensional array of length $W+1$, each entry taking $O(n)$ time, hence the total running time of the algorithm is $O(nW)$.
+\begin{code}
+knapsack_spec :: [(Integer,Integer)] -> Integer -> Integer
+knapsack_spec wvs w = 
+      maximum ( map (sum . map snd) (
+      filter ((<= w) .sum .map fst) (
+      subsequences wvs )))
+
+subsequences :: [a] -> [[a]] 
+subsequences = foldr f [[]] 
+  where f x = foldr (\y zs -> (x:y):y:zs) []
+
+knapsack_rec [] w = 0
+knapsack_rec ((wi,vi):wvs) w
+  | wi > w = knapsack_rec wvs w
+  | otherwise = max (knapsack_rec wvs w) (knapsack_rec wvs (w-wi) + vi)
+
+knapsack_dp wvs wtot = table ! (wtot,n)
+  where n = length wvs
+        table = array ((0,0),(wtot,n)) [((w,j), ks w j) | w <- [0..wtot], j <- [0..n]]
+        ks w 0 = 0
+        kw w j = if wj > w then table (w,j-1)
+                 else max (table ! w,j-1)
+                   ((table ! (w-wj, j-1)) + vj)
+          where (wj,vj) = wvs !! (j-1)
+\end{code}
+\subsubsection{Change Making Problem}
+Assuming an unlimited supply of coins, what is the minimum number of coins needed to give change to value $v$ using denominations $1=x_1,x_2,\ldots,x_n$?
+
+By setting $C[u]$ to be the minimum number of coins required to give change to a total value of $u$, and looking for $C[v]$, the following recurrence is constructed:
+\begin{align*}
+C[0] &=0\\
+C[u] &= 1+\min\left\{C[u-x_1]:1\le i\le n\,\wedge\, u\ge x_i\right\}
+\end{align*}
+The above fills an one-dimensional array of length $v$ with each entry taking, at most $O(n)$ time, hence the total running time is $O(nv)$.
+\begin{algorithm}
+\caption{Change giving algorithm}
+\KwIn{List of coin denominations $1=x_1,x_2,\ldots,x_n$, and value of change $v$}
+\KwOut{Minimum number of coins required to give change}
+$C[0]=0$\;
+\For{$u = 1$ \KwTo$v$}{
+$C[u] = 1+\min\left\{C[u-x_1]:1\le i\le n\,\wedge\, u\ge x_i\right\}$\;
+}
+\KwRet{$C[v]$}\;
+\end{algorithm}
+\subsubsection{Edit Distance Problem (Levenshtein Distance)}
+The edit distance of a string is the ``minimum number of edits needed to transform one string into another'' where an edit is an insertion, deletion or substitution.
+
+For the strings $x[0..m)$ and $y[0..n)$, let $0\le i\le m$ and $0\le j \le n$, set $E[i,j]$ to be the edit distance between $x[0..i)$ and $y[0..j)$, and find $E[m,n]$.
+
+There are three cases to be considered:
+\begin{enumerate*}
+\item Cost$=1$, to align $x[0..i-1)$ with $y[0..j)$ (insertion)
+\item Cost$=1$, to align $x[0..i)$ with $y[0..j-1)$ (deletion)
+\item Cost$=1\text{ if }x[i]\neq y[j]\text{ and }0\text{ otherwise}$, to align $x[0..i-1)$ with $y[0..j-1)$.
+\end{enumerate*}
+By letting $\delta(i,j):=1\text{ if }x[i]\neq y[j]\text{ and }0\text{ otherwise}$, then
+\[E[i,j]=\min\{E[i-1,j]+1, E[i,j-1]+1,E[i-1,j-1]+\delta(i,j)\}\]
+\begin{algorithm}
+\caption{Levenshtein Distance}
+\KwIn{Strings $x[0..m)$ and $y[0..n)$}
+\KwOut{Edit distance between $x$ and $y$}
+\lFor{$i=0$ \KwTo$m$}{$E[0,i]=i$}
+\lFor{$j=0$ \KwTo$n$}{$E[j,0]=j$}
+\For{$i=1$ \KwTo$m$}{
+	\For{$j=1$ \KwTo$n$}{
+$E[i,j]=\min\{E[i-1,j]+1, E[i,j-1]+1,E[i-1,j-1]+\delta(i,j)\}$
+	}
+}
+\KwRet{$E[m,n]$}\;
+\end{algorithm}
+\subsubsection{Travelling Salesman Problem}
+For the complete undirected graph with vertex-set $\{0,1,\ldots,n-1\}$ and edge lengths stored in the matrix $D=\left(d_{ij}\right)$.
+Find a tour starting and ending at a specified node with minimum total length including all other vertices exactly once.
+This problem is \emph{NP-hard}, as it is unlikely to ever be solved in polynomial time.  A brute force technique of examining every path takes $O(n!)$ ($(n-1)!$ possibilities), but dynamic programming reduces this to $O(n^22^n)$.
+
+By considering the subset $\{0,1,\ldots,j\}\subseteq S\subseteq \{0,1,\ldots,n-1\}$, let $C[S,j]$ but the shortest simple path length starting at 0 and ending at $j$, visiting each node in $S$ exactly once.  For $|S|>1$, set $C[S,0]=\infty$ (simple graph, therefore cannot start and end at same node).  By expressing $S$ in terms of its subproblems: \[C[S,j]=\min\left\{C[S\setminus\{j\},i]+d_{ij}\mid i\in S\,\wedge\, i\neq j\right\}\]
+The required answer is therefore \[\min\left\{C\left[\left\{O,1,\ldots,n-1\right\},j\right]+d_{j0}\mid 0\le j < n\right\}\]
+There are, at most $n\cdot 2^n$ subproblems, each taking linear time to solve, giving a total running time of $O\left(n^22^n\right)$.
+\subsubsection{All-pairs shortest path}
+Given a directed graph $(V,E)$ with weight (considered as distance) $w:E\mapsto \mathbb{R}^{\ge0}$, for each pair of vertices $u$ and $v$, find the shortest path from $u$ to $v$.
+
+Suppose the vertex-set is $\{0,1,\ldots,n-1\}$ and let $d[i,j;k]=\,$length of shortest path from $i$ to $j$, all of whose intermediate nodes are taken from $[0..k)$.
+
+Initially, \[d[i,j;0]=\begin{cases}w(i,j)&\text{ if }(i,j)\in E\\\infty&\text{ otherwise}\end{cases}\]
+If we have $d[i,k;k]$ and $d[k,j;k]$ then the shortest path that from $i$ to $j$ that uses $k$, as well as other nodes, goes through $k$ once, assuming no negative cycles.  Hence, $k$ is used in a shortest path from $i$ to $j$ iff $d[i,k;k]+d[k,j;k]<d[i,j;k]$, hence $d[i,j;k+1]$ should be updated accordingly.
+\begin{algorithm}
+\caption{Floyd-Warshall Algorithm}
+\KwIn{The directed graph $(V,E)$ with weight (considered as distance) $w:E\mapsto \mathbb{R}^{\ge0}$}
+\KwOut{Shortest path between all pairs of nodes}
+\For{$i=0$ \KwTo$|V|-1$}{
+\lFor{$j=0$ \KwTo$|V|-1$}{$d[i,j;0]=\infty$}}
+\lFor{each edge $(i,j)\in E$}{$d[i,j;0]=w(i,j)$}
+
+\For{$k=0$ \KwTo$|V|-1$}{
+\For{$i=0$ \KwTo$|V|-1$}{
+\For{$j=0$ \KwTo$|V|-1$}{
+$d[i,j;k+1]=\min\{d[i,k;k]+d[k,j;k],d[i,j;k]\}$\;}}}
+\KwRet{$d$}\;
+\end{algorithm}
+The running time is $O\left(|V|^3\right)$.
+\subsection{Greedy Algorithms}
+Similar to dynamic programming algorithms, these are also used to solve optimisation problems, and work by only choosing the step with the most immediate benefit as the next step, without looking ahead, or reconsidering earlier decisions.  They have the advantage that they are often more simple to implement, and there is no need for large amounts of storage, as only one decision is taken at each stage, and that decision is never reconsidered.
+\subsubsection{Change Making Algorithms}
+\paragraph{The Greedy Approach}Start with no change, and at each stage, choose a coin of the largest denomination available that does not exceed the balance to be paid.
+
+However, the above method does not work with all denominations of coins, and does not always yield the optimal solution.  For example, with $100,60,50,5,1$, to pay $110$, the greedy algorithm would give 3, ($100+5+5$), whereas $60+50$ is a more optimal solution.
+\subsubsection{Minimum Spanning Tree Algorithm}
+\begin{algorithm}
+	\caption{Generic MST algorithm}
+	$A=\emptyset$\;
+	\While{$A$ is not a spanning tree}{
+		find an edge $(u,v)$ that is safe for $A$\;
+		$A=A\cup\left\{(u,v)\right\}$\;}
+		\KwRet{$A$}
+\end{algorithm}
+\begin{description*}
+	\item[Loop Invariant]: ``$A$ is safe, i.e. a subset of some MST''
+	\item[Initialisation]: The invariant is trivially satisfied by $A=\emptyset$
+	\item[Maintenance]: Since only safe edges are added, $A$ remains a subset of some MST.
+	\item[Termination]: All edges added to $A$ are in an MST so $A$ must be a spanning tree that is also minimal.
+\end{description*}
+If $(S,V\setminus S)$ is a cut that respects $A$, and $(u,v)$ is a light edge crossing the cut, then $(u,v)$ is safe for $A$.
+\subsubsection{Kruskal's Algorithm}
+\paragraph{Description}\begin{itemize*}
+	\item Start with each vertex being its own connected component.
+	\item Find the edge with the lowest weight.
+	\item Merge two components by choosing the light edge connecting them
+\end{itemize*}
+Kruskal's requires a disjoint-set data structure to be most effective.  It is a set of disjoint sets $\mathcal S=\{S_1,\ldots,S_k\}$ where each set is represented by an individual element in each set.
+\begin{algorithm}
+	\caption{Kruskal's Algorithm}
+	\KwIn{The graph $(V,E)$ and weight function $w:E\mapsto\mathbb R$}
+	\KwOut{An MST for the graph}
+	\SetKwFunction{MS}{MAKE-SET}
+	\SetKwFunction{FS}{FIND-SET}
+	\SetKwFunction{UN}{UNION}
+	$A=\emptyset$\;
+	\lFor{each $v\in V$}{\MS{$v$}}
+	Sort $E$ by increasing weight $w$\;
+	\For{each edge $(u,v)$ from the sorted list}{
+	\If{\FS{$u$}$\neq$\FS{$v$}}{
+		$A=A\cup\{(u,v)\}$\;
+		\UN{$u,v$}\;
+	}
+	}
+	\KwRet{$A$}\;
+\end{algorithm}
+\begin{description*}
+	\item[Invariant]Let $\mathcal S$ be the collection of sets in the disjoint-set data structure and $L$ be the sorted list of edges not yet processed by the for-loop.
+		\begin{enumerate*}
+			\item$A$ is safe
+			\item For each $C\in\mathcal S$, $(C,A\upharpoonright C)$ is a spanning tree of the subgraph $(C,E\upharpoonright C)$.
+			\item Every processed edge's start- and end-points are in the same set in $\mathcal S$.
+		\end{enumerate*}
+	\item[Initialisation]$A=\emptyset$, $\mathcal S$ consists of only singleton sets and no edge has been processed $E\setminus L=\emptyset$ (hence all trivially true).
+	\item[Maintenance]Let $e=(u,v)$ be the edge to be processed, $C_1$ and $C_2$ be the sets that $u$ and $v$ belong to respectively, and $A$, $\mathcal S$ and $L$ refer to the state before the iteration, and $A'$, $\mathcal S'$ and $L'$ be the state after the iteration.
+
+		If $e$ is included in $A$, then $C_1$ and $C_2$ are different, and $e$ is the minimum edge crossing the cut $(C_1,V\setminus C_1)$, and the cut respects $A$.  As $e$ is the next element to be processed, it must also be the lightest element, hence the cut lemma holds.  The union operation ensures that the third part of the invariant holds.
+
+		If $e$ is not to be included in $A$, then there are no changes to $A$, $\mathcal S$ and $L$ is updated to include the discarded edge.
+	\item[Termination]All edges have been processed, therefore, $L=\emptyset$, and since all the nodes belong to the same set $C\in\mathcal S$, $C$ spans the whole graph, and by application of the cut lemma, and safe edges is an MST.
+\end{description*}
+\paragraph{Running Time}Initialisation of $A$ takes $O(1)$, first for-loop calls \texttt{MAKE-SET} $|V|$ times. $E$ is sorted in $|E|\log|E|$ time.  The second for-loop has $2|E|$ calls to \texttt{FIND-SET} and $|V|-1$ calls to \texttt{UNION}, giving a total running time of $O(|E|\log|E|)$.
+\subsubsection{Prim's Algorithm}
+\paragraph{Description}By growing the MST $A$ from a given root node $r$, at each stage, find a light edge crossing the cut $(V_A,V\setminus V_A)$ where $V_A$ is the edges incident on $A$.
+
+The lightest edge can be found quickly by using a priority queue, where each entry in the queue is a vertex in $V\setminus V_A$.  $\mathop{key}[v]$ is the minimum weight of any edge $(u,v)$ where $v\in V_A$, the vertex returned by \texttt{EXTRACT-MIN} is $v$ such that $\exists u\in V_A$ where $(u,v)$ is a light edge crossing $(V_A,V\setminus V_A)$. $\mathop{key}[v]=\infty$ if $v$ is not adjacent to any vertex in $V_A$.
+\begin{algorithm}
+	\caption{Prim's Algorithm}
+	\KwIn{The graph $(V,E)$ and weight function $w:E\mapsto\mathbb R$}
+	\KwOut{An MST for the graph}
+	\SetKwFunction{INSERT}{INSERT}
+	\SetKwFunction{DK}{DECREASE-KEY}
+	\SetKwFunction{EM}{EXTRACT-MIN}
+	$Q=\emptyset$\;
+	\For{each $u\in V$}{
+	$\mathop{key}[u]=\infty$, $\pi[u]=\dagger$\;
+	\INSERT{$Q,u$}\;
+	}
+	\DK{$Q,r,0$}
+	\While{$Q\neq\emptyset$}{
+		$u=\EM{Q}$\;
+		\For{each $v\in\mathop{Adj}[u]$}{
+			\If{$v\in Q\,\wedge\, w(u,v)<\mathop{key}[v]$}{
+			$\pi[v]=u$, \DK{$Q,v,w(u,v)$}\;
+			}
+		}
+	}
+\end{algorithm}
+\paragraph{Running Time}Initialising $Q$ takes $O(1)$, the first loop runs in $O(|V|)$, changing priority of $r$ takes $O(\log|V|)$, and $|V|$ \texttt{EXTRACT-MIN} calls are required with, at most $|E|$ \texttt{DECREASE-KEY} operations, giving running time of $O(|E|\log|V|)$.  The graph is connected, so $O(\log |E|)=O(\log|V|)$, hence total running time of $O(|E|\log |V|)$.
+\subsection{Dynamic Programming vs. Divide-and-Conquer}
+Dynamic programming is an optimisation technique, whereas divide-and-conquer is not normally used to solve optimality problems.
+
+Both techniques split the input problems into smaller parts and use the solutions to the smaller parts to form a larger solution, however, dynamic programming solves the subproblems at all split points, whereas divide-and-conquer uses pre-determined split points using non-overlapping problems.  Dynamic programming uses solutions to already calculated subproblems to find the total solution, to reduce space complexity.
+\section{Data Structures}
+\subsection{Heaps}
+A heap is a type of tree without explicit pointers.  Each level is filled from left to right, and the next level is only added when the previous is full.  All heaps satisfy either the max-heap or min-heap property: ``the value of a node (except the root node) is less than (greater than) or equal to that of its parent''.  In general, a heap can have any number of children on each of its nodes, and the maximum/minimum element of a max-/min-heap is at the root.  Heaps are used as efficient priority queues, and for heapsort, which has a complexity of $O(n\log n)$.
+\subsubsection{Representation}
+The root is always at $A[0]$, and for any node $i>0$, its parent is at $A[\lfloor(i-1)/2\rfloor]$ and its left and right children are at $A[2i+1]$ and $A[2i+2]$.
+\subsubsection{Maintaining heaps}
+\begin{algorithm}
+	\caption{Heapify algorithm}
+	\KwIn{Tree with left and right sub-trees of $i$ stored as heaps}
+	\KwOut{$A$ where entire tree is also a heap.}
+	\SetKwFunction{HEAPIFY}{HEAPIFY}
+	$n=A.\mathop{heapsize}$\;
+	$l=2i+1$, $r=2i+2$\;
+	\leIf{$l<n\,\wedge\,A[l]>A[i]$}{$\textit{largest}=l$}{$\textit{largest}=i$}
+	\lIf{$r>n\,\wedge\,A[r]>A[\textit{largest}]$}{$\textit{largest}=r$}
+	\If{$\textit{largest}\neq i$}{exchange $A[i]$ with $A[\textit{largest}]$\;\HEAPIFY{$A,\textit{largest}$}\;}
+\end{algorithm}
+\paragraph{Running Time}$\Theta(1)$ to find the largest of node and children.  Worst-case has tree with last row half full (i.e. subtree rooted at $i$ has, at most $2n/3$ elements), so $T(n)=T(2n/3)+\Theta(1)\Rightarrow T(n)=O(n^0\log_{3/2}n)=O(\log n)$ by the Master Theorem.
+\begin{algorithm}
+	\caption{Make-Heap algorithm}
+	\KwIn{An unsorted integer array $A$ of size $n$}
+	\KwOut{A heap of size $n$}
+	\SetKwFunction{HEAPIFY}{HEAPIFY}
+	$A.\mathop{heapsize}=A.\mathop{length}$\;
+	\lFor{$i=\lfloor{A.\mathop{length}/2\rfloor}$ \KwTo$0$}{\HEAPIFY{$A,i$}}
+	\KwRet{$A$}
+\end{algorithm}
+\paragraph{Correctness}
+\begin{description*}
+	\item[Invariant]: each node $i+1,i+2,\ldots,n-1$ is the root of a heap for $-1\le i\le\lfloor n/2\rfloor$
+	\item[Initialisation]: each node $\lfloor n/2\rfloor,\lfloor n/2\rfloor+1,\ldots,n-1$ is a leaf, which is the root of a trivial heap, therefore the invariant holds.
+	\item[Maintenance]: calling \texttt{HEAPIFY}$(A,i)$ causes $i$ to become the root of a new heap, hence, when $i$ is decremented, nodes at $i+1,i+2,\ldots,n-1$ are all roots of heaps.
+	\item[Termination]: when $i=-1$, the element at $0$ is the root of a heap, therefore all elements below it are also roots of heaps.
+\end{description*}
+\paragraph{Running Time}There are $n$ calls to \texttt{HEAPIFY}, each taking $O(\log n)$ time, giving $O(n\log n)$.
+
+As \texttt{HEAPIFY} is linear with the height of the node that it runs on, the height of the heap is $\lfloor \lg n\rfloor$, hence the cost of \texttt{MAKE-HEAP} is
+\[\sum_{h=0}^{\lfloor \lg n\rfloor}\lceil \frac{n}{2^{h+1}}O(h)=O\left(n\sum_{h=0}^{\lfloor \lg n\rfloor} \frac{h}{2^h}\right)\]As $\sum_{i=0}^\infty \frac i{2^i}=2$, the total running time is therefore $O(n)$.
+\end{document}

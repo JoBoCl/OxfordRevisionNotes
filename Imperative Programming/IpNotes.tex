@@ -1,0 +1,55 @@
+\documentclass[10pt]{article}
+\title{Imperative Programming}
+\date{}\author{}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ruled,noline,noend,linesnumbered]{algorithm2e}
+\usepackage{amsmath,amssymb}
+\usepackage[floats,charwidths,indent,lists,title,sections,margins]{savetrees}
+\usepackage{mdwlist}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{hyperref}
+\newcommand{\ieq}{\;\hat{=}\;}
+\input{scalamacros.tex}
+\begin{document}
+\twocolumn\maketitle
+\tableofcontents\listofalgorithms
+\section{Invariants and Variants}
+Invariants are properties that are true at the start and end of an iteration of a loop, with most programs with invariants having a pattern similar to:
+\begin{lstlisting}
+	// pre: preconditions
+	init
+	// `$I,V$`
+	while (test) {
+		// `$I$` and test
+		Body
+		// `$I$`
+	}
+	// I and not test
+	// post
+\end{lstlisting}
+In order to be satisfied that a program works, we must check that \texttt{init} establishes $I$, \texttt{Body} maintains $I$, the loop terminates and $I$ and not \texttt{test} implies the post-condition.  Additionally, the variant $V$ must be decreasing at each stage.
+
+This can be expressed more formally using a series of Hoare triples (where $\{P\}\texttt{Prog}\{Q\}$ means that if \texttt{Prog} is executed from a state satisfying $P$, it will terminate in a state satisfying $Q$).  If the following hold
+\begin{itemize*}
+	\item $\{\mathop{pre}\}\texttt{Init}\{I\}$
+	\item $\{I\land \mathop{test}\}\texttt{Body}\{I\}$
+	\item $I\land\lnot\mathop{test}\Rightarrow\mathop{post}$
+	\item $I\Rightarrow v\in\mathbb N$
+	\item $\{I\land\mathop{test}\land v=V\}\texttt{Body}\{v<V\}$
+\end{itemize*}
+then \[\{\mathop{pre}\}\texttt{Init};\mathop{while}(\mathop{test})\texttt{Body}\{\mathop{post}\}\]
+Most invariants can be found in the form $I\ieq z=f(n)\land0\le n\le N$, where the loop condition is often $n<N$.  When the loop terminates, $\lnot(n<N)\Rightarrow n\ge N$, as the invariant still holds, $n\ge N\land n\le N\Rightarrow n=N\Rightarrow f(n)=f(N)$.  In this case, the variant is often $N-n$, and the program terminates when $N-n=0$.
+
+In some cases, the invariant makes use of an accumulating parameter, and is of the form $I\ieq z\oplus f(n)\land 0\le n \le N$ where $n$ is decreasing.  For example, to calculate $X^N$, it is often easier to write the result as $X^N=z\times X^n$, and when $n=0$, $z$ is the solution.
+
+It is possible to write invariants for \texttt{for}-loops, however, the variables need to be substituted in.
+\begin{lstlisting}
+	Init // `$I[a/i]$`
+	for(i <- a until b) { // `$I\land a\le i < b$`
+		Body // `$I[i+1/i]$`
+	} // `$I[b/i]$`
+\end{lstlisting}
+\end{document}

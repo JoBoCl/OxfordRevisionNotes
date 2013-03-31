@@ -1,0 +1,39 @@
+\BOOKMARK [1][-]{section.1}{Functional Notation}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Reduction Orders}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{Precedence}{section.1}% 3
+\BOOKMARK [2][-]{subsection.1.3}{Functions as objects}{section.1}% 4
+\BOOKMARK [2][-]{subsection.1.4}{Functions as operators}{section.1}% 5
+\BOOKMARK [2][-]{subsection.1.5}{Guards}{section.1}% 6
+\BOOKMARK [2][-]{subsection.1.6}{Pattern Matching}{section.1}% 7
+\BOOKMARK [2][-]{subsection.1.7}{Functional Composition}{section.1}% 8
+\BOOKMARK [2][-]{subsection.1.8}{Lambda Notation}{section.1}% 9
+\BOOKMARK [2][-]{subsection.1.9}{Currying and Uncurrying}{section.1}% 10
+\BOOKMARK [1][-]{section.2}{Types and Strong-Typing}{}% 11
+\BOOKMARK [2][-]{subsection.2.1}{Polymorphism}{section.2}% 12
+\BOOKMARK [2][-]{subsection.2.2}{Type Inference Rules}{section.2}% 13
+\BOOKMARK [2][-]{subsection.2.3}{Type Classes}{section.2}% 14
+\BOOKMARK [1][-]{section.3}{Lists and their operations}{}% 15
+\BOOKMARK [2][-]{subsection.3.1}{List Comprehensions}{section.3}% 16
+\BOOKMARK [2][-]{subsection.3.2}{Maps over Lists}{section.3}% 17
+\BOOKMARK [2][-]{subsection.3.3}{Laws of map}{section.3}% 18
+\BOOKMARK [2][-]{subsection.3.4}{Filtering Lists}{section.3}% 19
+\BOOKMARK [2][-]{subsection.3.5}{Laws of filter}{section.3}% 20
+\BOOKMARK [2][-]{subsection.3.6}{Concatenating Lists}{section.3}% 21
+\BOOKMARK [2][-]{subsection.3.7}{Laws of concat}{section.3}% 22
+\BOOKMARK [2][-]{subsection.3.8}{Zipping and Unzipping Lists}{section.3}% 23
+\BOOKMARK [2][-]{subsection.3.9}{Laws of zip and zipWith}{section.3}% 24
+\BOOKMARK [2][-]{subsection.3.10}{take and drop}{section.3}% 25
+\BOOKMARK [2][-]{subsection.3.11}{takeWhile and dropWhile}{section.3}% 26
+\BOOKMARK [2][-]{subsection.3.12}{Folds over Lists}{section.3}% 27
+\BOOKMARK [2][-]{subsection.3.13}{Laws for Folds}{section.3}% 28
+\BOOKMARK [2][-]{subsection.3.14}{Scanning over Lists}{section.3}% 29
+\BOOKMARK [1][-]{section.4}{Induction}{}% 30
+\BOOKMARK [2][-]{subsection.4.1}{Induction over the Natural Numbers}{section.4}% 31
+\BOOKMARK [2][-]{subsection.4.2}{Induction over Lists}{section.4}% 32
+\BOOKMARK [2][-]{subsection.4.3}{Induction over Data Structures}{section.4}% 33
+\BOOKMARK [1][-]{section.5}{Infinite Lists and their applications}{}% 34
+\BOOKMARK [1][-]{section.6}{Partial Lists}{}% 35
+\BOOKMARK [1][-]{section.7}{Non-linear Data structures}{}% 36
+\BOOKMARK [2][-]{subsection.7.1}{Tip-Labelled Binary Trees}{section.7}% 37
+\BOOKMARK [2][-]{subsection.7.2}{Node-Labelled Binary Trees}{section.7}% 38
+\BOOKMARK [2][-]{subsection.7.3}{Binary Search Trees}{section.7}% 39

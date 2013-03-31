@@ -1,0 +1,431 @@
+\documentclass[10pt]{article}
+\title{Design and Analysis of Algorithms}
+\author{}\date{}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ruled,noline,noend,linesnumbered]{algorithm2e}
+\usepackage{amsmath,amssymb}
+\usepackage[floats,charwidths,indent,lists,title,sections,margins]{savetrees}
+\usepackage{mdwlist}
+\usepackage{mathtools}
+\usepackage{listings}
+\lstloadlanguages{Haskell}
+\lstnewenvironment{code}
+    {\lstset{}%
+      \csname lst@SetFirstLabel\endcsname}
+    {\csname lst@SaveFirstLabel\endcsname}
+    \lstset{
+      basicstyle=\small\ttfamily,
+      flexiblecolumns=false,
+      breaklines,
+      escapechar=`,
+      basewidth={0.5em,0.45em},
+      literate={+}{{$+$}}1 {/}{{$/$}}1 {*}{{$*$}}1 {=}{{$=$}}1
+               {>}{{$>$}}1 {<}{{$<$}}1 {\\}{{$\lambda$}}1
+               {\\\\}{{\char`\\\char`\\}}1
+               {->}{{$\rightarrow$}}2 {>=}{{$\geq$}}2 {<-}{{$\leftarrow$}}2
+               {<=}{{$\leq$}}2 {=>}{{$\Rightarrow$}}2 
+               {\ .}{{$\circ$}}2 {\ .\ }{{$\circ$}}2
+               {>>}{{>>}}2 {>>=}{{>>=}}2
+               {|}{{$\mid$}}1               
+    }
+\usepackage{hyperref}
+\begin{document}
+\twocolumn
+\maketitle
+\tableofcontents
+\section{Functional Notation}
+\subsection{Reduction Orders}
+Haskell uses lazy evaluation when processing an instruction: it works from the outermost function inwards, only evaluating expressions as they are needed.
+\begin{align*}
+	&\texttt{square} (3+4)&&\\
+	=&\; (3+4)\times(3+4) &&\text{definition of \texttt{square}}\\
+	=&\; 7 \times 7 &&\text{definition of $+$}\\
+	=&\; 49 && \text{definition of $\times$}
+\end{align*}
+when there are no more steps to evaluate, an expression is said to be in \emph{normal form}.
+
+This method has the advantage that if there is \emph{any} order to reduce a function to normal form, then the function will terminate.
+
+If a function does not terminate, it returns $\perp$, any function that is defined as $\texttt{f} \perp = \perp$ is said to be strict. Nonstrict functions can only be defined with lazy evaluation.
+\subsection{Precedence}
+Functional application takes precedence over all other operators and associates to the left, hence \verb\f x + 3 = (f x) + 3\ and \verb\f x y = (f x) y\
+\subsection{Functions as objects}
+It is possible for functions to take other functions as parameters, such functions are known as ``first-class functions''.
+\subsection{Functions as operators}
+If $\otimes$ is any infix function, then $(\otimes)$ is the corresponding prefix function, that is $x\otimes y=(\otimes)\; x\; y$.
+
+Additionally, the following are all equivalent $(\otimes\;m)\;n=n\otimes m=(n\;\otimes)\;m=(\otimes)\;m\;n$ -- this is called sectioning.
+\subsection{Guards}
+It is possible to define a function with specific cases, or base cases in mind.  For example:
+\begin{code}
+fact :: Integer -> Integer
+fact n
+  | n == 0 = 1
+  | n == 1 = 1
+  | otherwise = n * fact (n-1)
+\end{code}
+\subsection{Pattern Matching}
+It is possible to define a function with specific cases, or base cases in mind.  For example:
+\begin{code}
+fact :: Integer -> Integer
+fact 0 = 1
+fact 1 = 1
+fact n = n * fact (n-1)
+
+data Day = Saturday | Sunday | Monday | Tuesday | Wednesday | Thursday | Friday
+weekend :: Day -> Bool
+weekend Saturday = True
+weekend Sunday = True
+weekend d = False
+\end{code}
+It is important to define base cases first, as the compiler works from top-to-bottom, if \texttt{fact:3} and \texttt{fact:1} were swapped, the compiler would simply continue without ever checking for the base case.
+
+This method also has the advantage that equality tests are not required in order for this to work, as opposed to using guards, and is considered to be closer to the mathematical definition.
+\subsection{Functional Composition}
+To compose two functions together, the following typing rules must be obeyed.
+\begin{code}
+( . ) :: (b -> c) -> (a -> b) -> a -> c
+(f . g) x = f (g x)
+\end{code}
+\subsection{Lambda Notation}
+This is a useful shorthand to express functions, and $(\lambda x \mapsto e) \equiv f x = e$.  For example,
+\begin{code}
+filter p . filter q = filter (\x -> p x && q x)
+\end{code}
+shows how lambda expressions can be used to produce a function inline instead of specifying it as a separate function.
+\subsection{Currying and Uncurrying}
+Instead of passing parameters to a function as \verb\f (x,y)\, it is posible to pass them as two separate objects: \verb\f x y\.  In this case, it is possible to think of \texttt{f} as a function that takes an object \texttt{x} and returns a function that takes an object \texttt{y} and returns the result.
+\begin{code}
+curry :: ((a,b) -> c) -> a -> b -> c
+curry f x y = f (x,y)
+
+uncurry :: (a -> b -> c) -> (a,b) -> c
+uncurry f (x,y) = f x y
+\end{code}
+\section{Types and Strong-Typing}
+Haskell is a strongly typed language, that is, every well-formed expression has an accompanying well-formed type.  All functions should be accompanied by a type definition, which can also help in developing the function, and proving its correctness.  For example:
+\begin{code}
+square :: Integer -> Integer
+square (square 3) :: Integer
+(1, 2/3) :: (Integer, Float)
+sqrt :: Float -> Float
+\end{code}
+When defining types, and creating new datatypes, a capital letter must be used to start the type.
+\subsection{Polymorphism}
+When an individual type is too specific, it is possible to specify a more general type.
+\begin{code}
+id :: a -> a
+id x = x
+\end{code}
+\texttt{a} is used to denote any type, and is written in lower case, as opposed to starting with a capital.
+
+When a function takes inputs of multiple types, each type is given its own specific letter.
+\begin{code}
+flip :: (a -> b -> c) -> b -> a -> c
+flip f x y = f y x
+\end{code}
+When a function is passed as an argument, its types are contained within brackets.  List operations, when polymorphic are denoted using square brackets around the type.
+\begin{code}
+head :: [a] -> a
+head (x:xs) = x
+\end{code}
+\subsection{Type Inference Rules}
+\begin{itemize*}
+	\item \verb\x :: a\ and \verb\y :: b\ iff \verb\(x,y) :: (a,b)\
+	\item If \verb\x :: a\ and \verb\f :: a -> b\ then \verb\f x :: b\
+	\item If \verb\x :: a\ and \verb\f x :: b\ then \verb\f :: a -> b\
+	\item If \verb\f x :: b\ then \verb\x :: a\ and \verb\f :: a -> b\ for some type \texttt{a}.
+\end{itemize*}
+\subsection{Type Classes}
+When defining the type definition for multiplication, a type of $\texttt{a} \rightarrow \texttt{a}$ is too general, but specifying the type for each numeric datatype is too labourious.
+
+There exist a number of predefined type classes in Haskell:
+\begin{description*}
+	\item[\texttt{Eq}]Types with equality tests.  Functions and IO are not part of this class.
+	\item[\texttt{Ord}]Types both with equality tests and order relations.  Again, functions and IO are not part of this class.
+	\item[\texttt{Show}]Types that can be converted in to strings
+	\item[\texttt{Num}]Types with numerical representations
+\end{description*}
+In the case when there is an obvious way to define operations to make a datatype a member of a given type class, it is possible to use the \texttt{deriving} keyword.
+\begin{code}
+data Day = Monday | Tuesday |... deriving (Eq, Ord, Show)
+\end{code}
+To use a type class in a function definition, the following syntax is used:
+\begin{code}
+sort :: Ord a => [a] -> [a]
+\end{code}
+\section{Lists and their operations}
+Lists are ordered collections of elements, all of the same type, and are represented by enclosing the list of data with square brackets, and separating each item with commas.  For the type \texttt{a}, a list of \texttt{a} is given the type \texttt{[a]}.
+
+The empty list is represented as \texttt{[]} and can be considered as the initial building block for lists.  \texttt{(:)} appends a single elements to the front of a list and associates to the right (hence no need for brackets).  The following definitions for lists are all equivalent: \verb\[1,2,3,4]=1:[2,3,4]=1:2:3:4:[]\.  The string representation in Haskell is actually just a list of characters, and \verb\type String = [Char]\.
+
+It is possible to pattern match over lists, by using the fact that lists are either empty, or a single element followed by a list (including the empty list).
+\begin{code}
+null :: [a] -> Bool
+null [] = True
+null (x:xs) = False
+\end{code}
+Additionally, such pattern matching can be used when recursively defining functions.
+\begin{code}
+length :: [a] -> Integer
+length [] = 0
+length (x:xs) = 1 + length xs
+\end{code}
+\subsection{List Comprehensions}
+List comprehensions provide a way to define a list, similar to set comprehensions for produce sets, with the following rules:
+\begin{code}
+[ e | x <- xs ] = map (\x -> e) xs
+[ e | p ] = if p then [e] else []
+[ e | x <- xs, Q ] = concat (map f xs) where f x = [ e | Q ]
+[ e | p, Q] = if p then [ e | Q ] else []
+[ f x | x <- xs ] = map f xs
+[ x | x <- xs, p x ] = filter p xs
+[ e | Q, P ] =  concat [ [ e | P ] | Q ]
+\end{code}
+where \texttt{P} and \texttt{Q} are qualifiers made up of a possibly empty sequence of generators and guards.
+
+A generator is an expression similar to \verb\x <- xs\ and a guard is a predicate.
+\subsection{Maps over Lists}
+To apply a function to every element of a list, the standard higher-order function \texttt{map} exists.
+\begin{code}
+map :: (a -> b) -> [a] -> [b]
+map _ [] = []
+map f (x:xs) = f x : map f xs
+
+map square [1..4] = [1,4,9,16]
+\end{code}
+\subsection{Laws of \texttt{map}}
+\begin{code}
+(map f . map g) = map (f . g)
+map id = id
+head . map f = f . head
+tail . map f = map f . tail
+length . map f = length
+\end{code}
+\subsection{Filtering Lists}
+The function \texttt{filter} selects all elements in a list satisfying some property.
+\begin{code}
+filter :: (a -> Bool) -> [a] -> [a]
+filter p [] = []
+filter p (x:xs)
+  | p x = x : filter p xs
+  | otherwise = filter p xs
+\end{code}
+\subsection{Laws of \texttt{filter}}
+\begin{code}
+filter p . filter q = filter r
+                        where r x = p x && q x
+filter p . map f = map f . filter (p . f)
+\end{code}
+\subsection{Concatenating Lists}
+The function \texttt{concat} takes a list of lists and concatenates them all into a single list.
+\begin{code}
+concat :: [[a]] -> [a]
+concat [] = []
+concat (xs:xss) = xs ++ concat xss
+\end{code}
+\subsection{Laws of \texttt{concat}}
+\begin{code}
+concat (xss ++ yss) = concat xss ++ concat yss
+map f . concat = concat . map (map f)
+filter p . concat = concat . map (filter p)
+\end{code}
+\subsection{Zipping and Unzipping Lists}
+The function \texttt{zip} takes a pair of lists and returns a list of pairs, the function \texttt{zipWith} takes a function, a pair of lists and returns a list with the function applied to each pair of elements.
+Similarly, \texttt{unzip} takes a list of pairs and returns a pair of lists.
+\begin{code}
+zip :: [a] -> [b] -> [(a,b)]
+zip [] ys = []
+zip xs [] = []
+zip (x:xs) (y:ys) = (x,y) : zip xs ys
+
+zipWith :: (a -> b -> c) -> [a] -> [b] -> [c]
+zipWith f [] ys = [] 
+zipWith f xs [] = []
+zipWith f (x:xs) (y:ys) = f x y : zipWith f xs ys
+
+unzip : : [(a,b)] -> ([a], [b])
+unzip [] = ([], [])
+unzip ((x,y):ps) = (x:l1,y:l2)
+  where (l1,l2) = unzip ps
+\end{code}
+\subsection{Laws of \texttt{zip} and \texttt{zipWith}}
+\begin{code}
+zip = zipWith (,)
+zipWith f = map (uncurry f) . zip
+              where uncurry f (x,y) = f x y
+\end{code}
+\subsection{\texttt{take} and \texttt{drop}}
+The functions \texttt{take} and \texttt{drop} return the first and all but the first $n$ elements of a list respectively.
+\begin{code}
+take :: Int -> [a] -> [a]
+take 0 xs = []
+take n [] = []
+take n (x:xs) = x : take (n-1) xs
+
+drop :: Int -> [a] -> [a]
+drop 0 xs = xs
+drop n [] = []
+drop n (x:xs) = drop (n-1) xs
+
+take n xs ++ drop n xs = xs
+\end{code}
+\subsection{\texttt{takeWhile} and \texttt{dropWhile}}
+Similar to \texttt{take} and \texttt{drop}, these functions continue taking or dropping elements until a predicate does not hold.
+\begin{code}
+takeWhile :: (a -> Bool) -> [a] -> [a]
+takeWhile p [] = []
+takeWhile p (x:xs) 
+  | p x = x : takeWhile p xs
+  | otherwise = []
+
+dropWhile :: (a -> Bool) -> [a] -> [a]
+dropWhile p [] = []
+dropWhile p (x:xs)
+  | p x = dropWhile p xs
+  | otherwise = (x:xs)
+\end{code}
+\subsection{Folds over Lists}
+Many functions can be defined as
+\begin{code}
+f [] = e
+f (x:xs) = x `$\otimes$` f xs
+\end{code}
+which, when expanded, gives $f x = x_0\otimes(x_1\otimes(\ldots(x_n\otimes e)))$.  The functions \texttt{foldr} and \texttt{foldr1} use this pattern, where \texttt{foldr1} is undefined for empty lists.
+\begin{code}
+foldr :: (a -> b -> b) -> b -> [a] -> b
+foldr f e [] = e
+foldr f e (x:xs) = f x (foldr f e xs)
+
+foldr1 :: (a -> a -> a) -> [a] -> a
+foldr1 f [x] = x
+foldr1 f (x:xs) = f x (foldr1 f xs)
+
+fact :: Integer -> Integer
+fact n = foldr (*) 1 [1..n]
+\end{code}
+The conversion of a list of digits to decimal does not fit the above pattern
+\begin{code}
+decimal [x0,x1,x2] = x0 * 10^2 + x1 * 10^1 + x2 * 10^0
+decimal [x0,x1,x2] = ((0 `$\otimes$` x0) `$\otimes$` x` ) `$\otimes$` x2
+                      where n `$\otimes$` x = 10*n + x
+\end{code}
+The functions \texttt{foldl} and \texttt{foldl1} capture this pattern.
+\begin{code}
+foldl :: (b -> a -> b) -> b -> [a] -> b
+foldl f e [] = e
+foldl f e (x:xs) = foldl f (f e x) xs
+
+foldl1 :: (a -> a -> a) -> [a] -> a
+foldl1 f (x:xs) = foldl f x xs
+\end{code}
+\subsection{Laws for Folds}
+\begin{code}
+map f = foldr g [] where g x xs = f x : xs
+filter p = foldr g [] 
+             where g x xs = if p then x :xs else xs
+concat = foldr (++) []
+reverse = foldr snoc [] where snoc x xs = xs ++ [x]
+sum = foldr (+) 0 = foldl (+) 0
+product = foldr (*) 1 = foldl (*) 1
+and = foldr (&&) True
+or = foldr (||) False
+maximum = foldr1 max
+minimum = foldr1 mi
+\end{code}
+\subsection{Scanning over Lists}
+The function \texttt{scanl} applies \texttt{foldl} to each of the initial segments of a list.
+\begin{code}
+	inits : : [a] -> [[a]]
+	inits [ ] = [ [ ]]
+	inits (x:xs) = [] : map (x:) (inits xs)
+
+	scanl : : (b -> a -> b) -> b -> [a] -> [b]
+	scanl f e [ ] = [e]
+	scanl f e (x:xs) = e : scanl f (f e x) xs
+\end{code}
+and similarly for \texttt{scanr}
+\begin{code}
+	tails : : [a] -> [[a]]
+	tails [ ] = [[]]
+	tails (x:xs) = (x:xs) : tails xs
+
+	scanr : : (a -> b -> b) -> b -> [a] -> [b]
+	scanr f e [ ] = [e]
+	scanr f e (x:xs) = f x (head y) : y where y = scanr f e xs
+\end{code}
+
+\section{Induction}
+\subsection{Induction over the Natural Numbers}
+As all natural numbers are either $0$ or of the form $n+1$, to show that $\forall n\in\mathbb N\cdot P(n)$, $P(0)$ must be shown to hold, as well as $P(n+1)$ assuming that $P(n)$ holds.
+\subsection{Induction over Lists}
+Similarly to the natural numbers, all finite lists are either empty, or of the form \texttt{(x:xs)} for some \texttt{x} and some finite list \texttt{xs}.  To show that some $P(\texttt{xs})$ holds for all lists, it must be shown that $P(\texttt{[]})$ holds, as well as $P(\texttt{(x:xs)})$ assuming $P(\texttt{xs})$.
+\subsection{Induction over Data Structures}
+To prove that a property $P$ is satisfied for all finite elements of a datatype, it must be shown to hold for all atomic values, and all recursive values, assuming that $P$ holds for the immediate predecessors.
+\section{Infinite Lists and their applications}
+Infinite lists are defined as either \verb\[x(,y)..]\, where $x$ is the first element and $y$ is optionally given as the second element to indicate the interval between each element (defaults to 1 when $y$ is not specified).
+All the usual functions can be applied to infinite lists, and will often result in infinite lists as outputs.  Some functions, such as folds will not terminate.  Application of functions such as \texttt{take} will result in finite lists, making lazy evaluation particularly important.
+
+An infinite list can be thought of as the limit of a sequence of partial lists.  For example, the list \verb\[0..]\ is the limit of the sequence $\perp,0:\perp,0:1:\perp,\ldots$.  This property allows for induction over infinite lists.  To show that $P$ holds for an infinite list, $P$ must be shown to be chain complete: if $P$ holds for all partial lists $\texttt{xs}_i$ tending towards \texttt{xs}, then $P(\texttt{xs})$ holds.
+\section{Partial Lists}
+By definition, a finite list has a specified number of elements, whereas an infinite list will have infinitely many elements.  Partial lists are those that are not ended by the empty list, but by $\perp$.  For example $0:1:2:\perp\neq\left[0,1,2,\perp\right]$.  The latter is a finite list containing $\perp$.  In order to extend induction over lists to include all partial lists, for some given $P$, it must also be shown that $P(\perp)$ holds.
+\section{Non-linear Data structures}
+\subsection{Tip-Labelled Binary Trees}
+These are binary trees, only containing data at the leaf nodes, and are represented in Haskell as
+\begin{code}
+data Tree a = Leaf a | Fork (Tree a) (Tree a)
+
+foldTree : : (b -> b -> b) -> (a -> b) -> Tree a -> b
+foldTree f g (Leaf x) = g x
+foldTree f g (Fork t1 t2) = f (foldTree f g t1) (foldTree f g t2)
+
+flatten : : Tree a -> [a]
+flatten (Leaf x) = [x]
+flatten (Fork t1 t2) = flatten t1 ++ flatten t2
+flatten = foldTree (++) (\x -> [x])
+
+size : : Tree a -> Int
+size (Leaf x) = 1
+size (Fork t1 t2) = size t1 + size t2
+size = foldTree (+) (const 1)
+
+const x y = x
+
+depth : : Tree a -> Int
+depth (Leaf x) = 0
+depth (Fork t1 t2) = 1 + (depth t1 `max` depth t2)
+depth = foldTree (\x y -> 1 + (x `max` y)) (const 0)
+\end{code}
+Note that \texttt{f} is applied to the sub-trees and \texttt{g} is applied to the leaves.
+\subsection{Node-Labelled Binary Trees}
+These are binary trees, containing data both at the leaf nodes, and at the root nodes, and are represented in Haskell as
+\begin{code}
+data NTree a = Empty | Node (NTree a) a (NTree a)
+
+foldNTree :: (b -> a -> b -> b) -> b -> NTree a -> b
+foldNTree f e Empty = e
+foldNTree f e (Node t1 x t2) = f (foldNTree f e t1) x (foldBTree f e t2)
+\end{code}
+\subsection{Binary Search Trees}
+These are node-labelled binary trees, also satisfying the property that the value on each node is greater than all the values in its left subtree and less than all the values in its right subtree, and are represented in Haskell by:
+\begin{code}
+data Ord a => STree a = Empty | Node (NTree a) a (NTree a)
+
+isIn : : Ord a => a -> STree a -> Bool
+isIn x Empty = False
+isIn x (Node t1 n t2)
+  | x == n = True
+  | x < n = isIn x t1
+  | x > n = isIn x t2
+
+insert : : Ord a => a -> STree a -> STree a
+insert x Empty = Node Empty x Empty
+insert x (Node t1 n t2)
+  | x == n = Node t1 n t2
+  | x < n  = Node (insert x t1) n t2
+  | x > n  = Node t1 n (insert x t2)
+\end{code}
+
+\end{document}
