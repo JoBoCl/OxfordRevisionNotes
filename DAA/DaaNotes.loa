@@ -6,7 +6,7 @@
 \contentsline {algocf}{\numberline {6}{\ignorespaces Knapsack Problem without repetition}}{3}{algocf.6}
 \contentsline {algocf}{\numberline {7}{\ignorespaces Change giving algorithm}}{4}{algocf.7}
 \contentsline {algocf}{\numberline {8}{\ignorespaces Levenshtein Distance}}{4}{algocf.8}
-\contentsline {algocf}{\numberline {9}{\ignorespaces Floyd-Warshall Algorithm}}{4}{algocf.9}
+\contentsline {algocf}{\numberline {9}{\ignorespaces Floyd-Warshall Algorithm}}{5}{algocf.9}
 \contentsline {algocf}{\numberline {10}{\ignorespaces Generic MST algorithm}}{5}{algocf.10}
 \contentsline {algocf}{\numberline {11}{\ignorespaces Kruskal's Algorithm}}{5}{algocf.11}
 \contentsline {algocf}{\numberline {12}{\ignorespaces Prim's Algorithm}}{5}{algocf.12}
@@ -17,7 +17,9 @@
 \contentsline {algocf}{\numberline {17}{\ignorespaces Extract Max Algorithm}}{7}{algocf.17}
 \contentsline {algocf}{\numberline {18}{\ignorespaces Increase Key Algorithm}}{7}{algocf.18}
 \contentsline {algocf}{\numberline {19}{\ignorespaces Insertion Algorithm}}{7}{algocf.19}
-\contentsline {algocf}{\numberline {20}{\ignorespaces Depth-First Search Algorithm}}{7}{algocf.20}
+\contentsline {algocf}{\numberline {20}{\ignorespaces Depth-First Search Algorithm}}{8}{algocf.20}
 \contentsline {algocf}{\numberline {21}{\ignorespaces Topological Sort}}{8}{algocf.21}
 \contentsline {algocf}{\numberline {22}{\ignorespaces Strongly Connected Component Discovery}}{8}{algocf.22}
 \contentsline {algocf}{\numberline {23}{\ignorespaces Bread-First Search}}{8}{algocf.23}
+\contentsline {algocf}{\numberline {24}{\ignorespaces Djikstra's Shortest Path Algorithm}}{9}{algocf.24}
+\contentsline {algocf}{\numberline {25}{\ignorespaces Bellman-Ford Algorithm}}{9}{algocf.25}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/W32TeX) (format=pdflatex 2013.3.27)  3 APR 2013 17:39
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/W32TeX) (format=pdflatex 2013.3.27)  3 APR 2013 19:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -885,44 +885,38 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.183 ...n)$ to multiply two $n$-bit numbers as \[
-                                                  T(n)=4T(n/2)+O(n)\]which, ...
-pdfTeX warning (ext4): destination with the same identifier (name{AlgoLine.1.2}
-) has been already used, duplicate ignored
+l.179 \begin{align*}
+                    pdfTeX warning (ext4): destination with the same identifier
+ (name{AlgoLine.1.2}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.183 ...n)$ to multiply two $n$-bit numbers as \[
-                                                  T(n)=4T(n/2)+O(n)\]which, ...
-pdfTeX warning (ext4): destination with the same identifier (name{AlgoLine.1.3}
-) has been already used, duplicate ignored
+l.179 \begin{align*}
+                    pdfTeX warning (ext4): destination with the same identifier
+ (name{AlgoLine.1.3}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.183 ...n)$ to multiply two $n$-bit numbers as \[
-                                                  T(n)=4T(n/2)+O(n)\]which, ...
-pdfTeX warning (ext4): destination with the same identifier (name{AlgoLine.1.4}
-) has been already used, duplicate ignored
+l.179 \begin{align*}
+                    pdfTeX warning (ext4): destination with the same identifier
+ (name{AlgoLine.1.4}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.183 ...n)$ to multiply two $n$-bit numbers as \[
-                                                  T(n)=4T(n/2)+O(n)\]which, ...
-pdfTeX warning (ext4): destination with the same identifier (name{AlgoLine.1.5}
-) has been already used, duplicate ignored
+l.179 \begin{align*}
+                    pdfTeX warning (ext4): destination with the same identifier
+ (name{AlgoLine.1.5}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.183 ...n)$ to multiply two $n$-bit numbers as \[
-                                                  T(n)=4T(n/2)+O(n)\]which, ...
-pdfTeX warning (ext4): destination with the same identifier (name{AlgoLine.1.6}
-) has been already used, duplicate ignored
+l.179 \begin{align*}
+                    pdfTeX warning (ext4): destination with the same identifier
+ (name{AlgoLine.1.6}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.183 ...n)$ to multiply two $n$-bit numbers as \[
-                                                  T(n)=4T(n/2)+O(n)\]which, ...
-]
+l.179 \begin{align*}
+                    ]
 Overfull \hbox (3.37141pt too wide) in paragraph at lines 204--205
 \T1/lmr/m/n/10/-25ls (-50) For the $\OML/lmm/m/it/10/-25ls n$ \T1/lmr/m/n/10/-2
 5ls (-50) items, each of weight $\OML/lmm/m/it/10/-25ls w[]; w[] [] w[]$ \T1/lm
@@ -938,8 +932,8 @@ r/m/n/10/-25ls (-50) and value $\OML/lmm/m/it/10/-25ls v[]; v[]; [] v[]$
 
 [3] [4] [5] [6]
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 548.
-LaTeX Font Info:    Try loading font information for T1+lmss on input line 598.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 549.
+LaTeX Font Info:    Try loading font information for T1+lmss on input line 599.
 
  (c:/texlive/2012/texmf-dist/tex/latex/lm/t1lmss.fd
 File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
@@ -949,23 +943,34 @@ Package microtype Info: Loading generic settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
  [7]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 692.
-
 [8]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 692.
+Overfull \hbox (28.1865pt too wide) detected at line 699
+\OML/lmm/m/it/10/-25ls ^^N\OT1/lmr/m/n/10/-25ls (\OML/lmm/m/it/10/-25ls u; v\OT
+1/lmr/m/n/10/-25ls ) := []
+ []
+
+
+Overfull \hbox (23.68713pt too wide) in paragraph at lines 707--708
+\T1/lmr/m/n/10/-25ls (-50) undi-rected graphs with non-negative weights in $\OM
+L/lmm/m/it/10/-25ls O []$ 
+ []
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 766.
+[9]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 766.
  (./DaaNotes.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 692.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 692.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 766.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 766.
 Package rerunfilecheck Info: File `DaaNotes.out' has not changed.
-(rerunfilecheck)             Checksum: 21ED44CBE61A325D7F15334F61CCC4F0;2735.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 692.
+(rerunfilecheck)             Checksum: 99179ED6BA195BD912B06085B263A675;3044.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 766.
  ) 
 Here is how much of TeX's memory you used:
- 13665 strings out of 495020
- 202347 string characters out of 3181260
- 430384 words of memory out of 3000000
- 16009 multiletter control sequences out of 15000+200000
- 155174 words of font info for 283 fonts, out of 3000000 for 9000
+ 13730 strings out of 495020
+ 203347 string characters out of 3181260
+ 419444 words of memory out of 3000000
+ 16034 multiletter control sequences out of 15000+200000
+ 172560 words of font info for 293 fonts, out of 3000000 for 9000
  36 hyphenation exceptions out of 8191
  45i,20n,53p,591b,1850s stack positions out of 5000i,500n,10000p,200000b,50000s
 {c:/texlive/2012/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{c:/texlive/2012/tex
@@ -989,10 +994,10 @@ mf-dist/fonts/type1/public/lm/lmtk10.pfb><c:/texlive/2012/texmf-dist/fonts/type
 1/public/lm/lmtt10.pfb><c:/texlive/2012/texmf-dist/fonts/type1/public/lm/lmtt9.
 pfb><c:/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
 <c:/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on DaaNotes.pdf (8 pages, 410843 bytes).
+Output written on DaaNotes.pdf (9 pages, 420099 bytes).
 PDF statistics:
- 685 PDF objects out of 1000 (max. 8388607)
- 646 compressed objects within 7 object streams
- 315 named destinations out of 1000 (max. 500000)
- 50977 words of extra memory for PDF output out of 51595 (max. 10000000)
+ 743 PDF objects out of 1000 (max. 8388607)
+ 702 compressed objects within 8 object streams
+ 344 named destinations out of 1000 (max. 500000)
+ 52545 words of extra memory for PDF output out of 61914 (max. 10000000)
 

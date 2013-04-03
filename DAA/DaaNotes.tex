@@ -310,6 +310,7 @@ By considering the subset $\{0,1,\ldots,j\}\subseteq S\subseteq \{0,1,\ldots,n-1
 The required answer is therefore \[\min\left\{C\left[\left\{O,1,\ldots,n-1\right\},j\right]+d_{j0}\mid 0\le j < n\right\}\]
 There are, at most $n\cdot 2^n$ subproblems, each taking linear time to solve, giving a total running time of $O\left(n^22^n\right)$.
 \subsubsection{All-pairs shortest path}
+\label{sec:fw}
 Given a directed graph $(V,E)$ with weight (considered as distance) $w:E\mapsto \mathbb{R}^{\ge0}$, for each pair of vertices $u$ and $v$, find the shortest path from $u$ to $v$.
 
 Suppose the vertex-set is $\{0,1,\ldots,n-1\}$ and let $d[i,j;k]=\,$length of shortest path from $i$ to $j$, all of whose intermediate nodes are taken from $[0..k)$.
@@ -689,4 +690,77 @@ The initial setup records that $s$ can be reached from itself in 0 time and in 0
 \paragraph{Running Time}$O(|V|+|E|)$.  $O(|V|)$ as every vertex is enqueued at most once, $O(|E|)$ as every vertex dequeued at most once, and $(u,v)$ is examined only when $u$ is dequeued, therefore every edge is examined at most once if the graph is directed, and twice is the graph is undirected.
 
 Unlike DFS, BFS may not reach all the vertices, as it only works outwards from a source vertex.  If there is no path from $s$ to $v$, then it will not be discovered.
+\subsubsection{Shortest Path Problems}
+Consider a directed graph $G=(V,E)$ with weight or length $w:E\mapsto \mathbb R$.
+
+The weight of a path $p=\langle v_0,v_1,\ldots,v_k\rangle$ is given as \[w(p):=\sum_{i=1}^k w(v_{i-1},v_i)\]
+
+The shortest-path weight from $u$ to $v$ is given as
+\[\delta(u,v) := \begin{cases} \min\{ w(p) : p \text{ is a path from $u$ to $v$}\} &\exists\text{ path from $u$ to $v$}\\\infty&\text{otherwise}\end{cases}\]
+
+A shortest path from $u$ to $v$ is a path such that $\delta(u,v)=w(p)$.
+
+There are a number of different shortest path algorithms:
+\begin{description}
+	\item[Dynamic Programming] -- solves the single-source problem, for a DAG in $\Theta(|E|+|V|)$
+	\item[BFS] -- solves the single-source problem for graphs with unit weight ($\forall e\in E\cdot w(e)=1$) in $O(|V|+|E|)$.
+	\item[Djiksktra] -- solves the single-source problem for directed or undirected graphs with non-negative weights in $O\left( \left( |V|+|E| \right)\log |V| \right)$
+	\item[Floyd-Warshall] -- solvers the all-pairs shortest path probelm for graphs without negative weight cycles in $O\left(|V|^3\right)$
+\end{description}
+\subsubsection{Djikstra's Algorithm}
+Using a priority queue, Djikstra's adapts BFS to construct the shortest-path tree from $\pi[v]$.
+
+By maintaining two sets of vertices -- $S$ for vertices where the shortest-path is known, and $Q=V\setminus S$ to be processed (stored in the priority queue).
+\begin{algorithm}
+	\caption{Djikstra's Shortest Path Algorithm}
+	\KwIn{The graph $G=(V,E)$, $s\in V$ as the source node, $w:E\mapsto \mathbb R_{\ge 0}$}
+	\KwOut{For each $v\in V$, $d[v]$ and $\pi[v]$}
+	\SetKwArray{Disc}{d}
+	\SetKwArray{Path}{$\pi$}
+	\SetKwData{null}{null}
+	\SetKwFunction{MQ}{MAKE-QUEUE}
+	\SetKwFunction{EM}{EXTRACT-MIN}
+	\SetKwFunction{DK}{DECREASE-KEY}
+	
+	\lForAll{$v\in V$}{\Disc{$v$}$\;=\infty$, \Path{$v$} = \null}
+	\Disc{$s$}$\;=0; S=\emptyset$\;
+	$Q=\;$\MQ{$V$} with \Disc{$v$} as keys\;
+	\While{$Q\neq \emptyset$}{
+		$u=\;$\EM{$Q$}\;
+		$S=S\cup \{u\}$\;
+		\ForAll{$v\in\mathop{Adj}[u]$}{
+		\If{$\Disc[u]+w(u,v) <\Disc[v]$}{
+			$\Disc[v] = \Disc[u] +w(u,v)$\;
+			\Path{$v$}$\;=u$\;		
+			\DK{$Q,v,$\Disc{$v$}}\;
+			}
+	}
+	}
+\end{algorithm}
+To check for the presence of a unique shortest path, create an aray $u$, initialised to \texttt{true}.  By modifying the \texttt{if}-clause in the inner \texttt{for}-loop, if there is a new shortest path for a node $v$, then the existence of a new shortest path is dependent on the existence of a shortest path to its parent.  If a shortest path has already been discovered, and another is found, then $u[v]=\texttt{false}$.
+\subsubsection{Floyd-Warshall} See section~\ref{sec:fw}
+\subsubsection{Bellman-Ford}This is used to test for the presence of a negative weight cycle from a specific node.
+\begin{algorithm}
+	\caption{Bellman-Ford Algorithm}
+	\KwIn{The graph $G=(V,E)$, $s\in V$ as a source node, $w:E\mapsto \mathbb R$}
+	\KwOut{False if a negative weight cycle can be found from $s$, else $d[v]$, $\pi[v]$ for all $v\in V$}
+	\SetKwArray{Disc}{d}
+	\SetKwArray{Path}{$\pi$}
+	\SetKwData{null}{null}
+
+	\lForAll{$v\in V$}{$\Disc[v]=\infty;\Path[v]=\null$}
+	$\Disc[s]=0$\;
+	\For{$i=1\KwTo |V|-1$}{
+		\ForAll{$(u,v)\in E$}{
+			\lIf{$\Disc{u}+w(u,v)<\Disc{v}$}{ $\Disc{v}=\Disc{u}+w(u,v);\Path{v}=u$}
+		}
+	}
+	\ForAll{$(u,v)\in E$}{
+		\lIf{$\Disc[u] + w(u,v) < \Disc[v]$}{
+			\KwRet{TRUE}
+		}
+	}
+	\KwRet{FALSE}\;
+\end{algorithm}
+\paragraph{Running Time}The initialisation iterates over $V$, so takes $\Theta(|V|)$.  Each of the iterations of the second loop then iterate over the edges in $E$, giving a runtime of $O(|V|\Theta(|E|))$, and the final loop requires $O(|E|)$.  Therefore, the total runtime is $O(|V||E|)$.
 \end{document}
