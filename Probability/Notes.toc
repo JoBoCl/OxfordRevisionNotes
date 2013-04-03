@@ -7,7 +7,7 @@
 \contentsline {subsection}{\numberline {1.6}Conditional Expectation}{2}{subsection.1.6}
 \contentsline {subsection}{\numberline {1.7}Independence}{2}{subsection.1.7}
 \contentsline {subsection}{\numberline {1.8}Discrete Random Variables}{2}{subsection.1.8}
-\contentsline {subsection}{\numberline {1.9}Probability Mass Function}{3}{subsection.1.9}
+\contentsline {subsection}{\numberline {1.9}Probability Mass Function}{2}{subsection.1.9}
 \contentsline {subsection}{\numberline {1.10}Classical Distributions}{3}{subsection.1.10}
 \contentsline {subsubsection}{\numberline {1.10.1}Bernoulli Distribution}{3}{subsubsection.1.10.1}
 \contentsline {subsubsection}{\numberline {1.10.2}Binomial Distribution}{3}{subsubsection.1.10.2}
@@ -19,8 +19,8 @@
 \contentsline {subsection}{\numberline {1.14}Joint Probability Mass Function}{3}{subsection.1.14}
 \contentsline {subsection}{\numberline {1.15}Marginal Distribution}{3}{subsection.1.15}
 \contentsline {subsection}{\numberline {1.16}Covariance}{3}{subsection.1.16}
-\contentsline {subsection}{\numberline {1.17}Multivariate Joint Distributions}{4}{subsection.1.17}
-\contentsline {subsection}{\numberline {1.18}Multivariate Independence}{4}{subsection.1.18}
-\contentsline {subsection}{\numberline {1.19}Variance}{4}{subsection.1.19}
+\contentsline {subsection}{\numberline {1.17}Multivariate Joint Distributions}{3}{subsection.1.17}
+\contentsline {subsection}{\numberline {1.18}Multivariate Independence}{3}{subsection.1.18}
+\contentsline {subsection}{\numberline {1.19}Variance}{3}{subsection.1.19}
 \contentsline {section}{\numberline {2}Axioms}{4}{section.2}
-\contentsline {section}{\numberline {3}Theorems}{5}{section.3}
+\contentsline {section}{\numberline {3}Theorems}{4}{section.3}
