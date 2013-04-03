@@ -11,29 +11,46 @@
 \contentsline {paragraph}{Running time}{2}{paragraph*.8}
 \contentsline {subsubsection}{\numberline {1.1.3}Selection Problem}{2}{subsubsection.1.1.3}
 \contentsline {subsubsection}{\numberline {1.1.4}Integer Multiplication}{2}{subsubsection.1.1.4}
-\contentsline {subsubsection}{\numberline {1.1.5}Matrix Multiplication}{2}{subsubsection.1.1.5}
+\contentsline {subsubsection}{\numberline {1.1.5}Matrix Multiplication}{3}{subsubsection.1.1.5}
 \contentsline {subsection}{\numberline {1.2}Dynamic Programming}{3}{subsection.1.2}
 \contentsline {subsubsection}{\numberline {1.2.1}Knapsack Problems with Repetition}{3}{subsubsection.1.2.1}
 \contentsline {subsubsection}{\numberline {1.2.2}Knapsack Problems without Repetition}{3}{subsubsection.1.2.2}
-\contentsline {subsubsection}{\numberline {1.2.3}Change Making Problem}{3}{subsubsection.1.2.3}
-\contentsline {subsubsection}{\numberline {1.2.4}Edit Distance Problem (Levenshtein Distance)}{3}{subsubsection.1.2.4}
+\contentsline {subsubsection}{\numberline {1.2.3}Change Making Problem}{4}{subsubsection.1.2.3}
+\contentsline {subsubsection}{\numberline {1.2.4}Edit Distance Problem (Levenshtein Distance)}{4}{subsubsection.1.2.4}
 \contentsline {subsubsection}{\numberline {1.2.5}Travelling Salesman Problem}{4}{subsubsection.1.2.5}
 \contentsline {subsubsection}{\numberline {1.2.6}All-pairs shortest path}{4}{subsubsection.1.2.6}
 \contentsline {subsection}{\numberline {1.3}Greedy Algorithms}{4}{subsection.1.3}
-\contentsline {subsubsection}{\numberline {1.3.1}Change Making Algorithms}{4}{subsubsection.1.3.1}
-\contentsline {paragraph}{The Greedy Approach}{4}{paragraph*.9}
-\contentsline {subsubsection}{\numberline {1.3.2}Minimum Spanning Tree Algorithm}{4}{subsubsection.1.3.2}
-\contentsline {subsubsection}{\numberline {1.3.3}Kruskal's Algorithm}{4}{subsubsection.1.3.3}
-\contentsline {paragraph}{Description}{4}{paragraph*.10}
+\contentsline {subsubsection}{\numberline {1.3.1}Change Making Algorithms}{5}{subsubsection.1.3.1}
+\contentsline {paragraph}{The Greedy Approach}{5}{paragraph*.9}
+\contentsline {subsubsection}{\numberline {1.3.2}Minimum Spanning Tree Algorithm}{5}{subsubsection.1.3.2}
+\contentsline {subsubsection}{\numberline {1.3.3}Kruskal's Algorithm}{5}{subsubsection.1.3.3}
+\contentsline {paragraph}{Description}{5}{paragraph*.10}
 \contentsline {paragraph}{Running Time}{5}{paragraph*.11}
 \contentsline {subsubsection}{\numberline {1.3.4}Prim's Algorithm}{5}{subsubsection.1.3.4}
 \contentsline {paragraph}{Description}{5}{paragraph*.12}
 \contentsline {paragraph}{Running Time}{5}{paragraph*.13}
 \contentsline {subsection}{\numberline {1.4}Dynamic Programming vs. Divide-and-Conquer}{5}{subsection.1.4}
-\contentsline {section}{\numberline {2}Data Structures}{5}{section.2}
-\contentsline {subsection}{\numberline {2.1}Heaps}{5}{subsection.2.1}
-\contentsline {subsubsection}{\numberline {2.1.1}Representation}{5}{subsubsection.2.1.1}
-\contentsline {subsubsection}{\numberline {2.1.2}Maintaining heaps}{5}{subsubsection.2.1.2}
-\contentsline {paragraph}{Running Time}{5}{paragraph*.14}
-\contentsline {paragraph}{Correctness}{5}{paragraph*.15}
+\contentsline {section}{\numberline {2}Data Structures}{6}{section.2}
+\contentsline {subsection}{\numberline {2.1}Heaps}{6}{subsection.2.1}
+\contentsline {subsubsection}{\numberline {2.1.1}Representation}{6}{subsubsection.2.1.1}
+\contentsline {subsubsection}{\numberline {2.1.2}Maintaining heaps}{6}{subsubsection.2.1.2}
+\contentsline {paragraph}{Running Time}{6}{paragraph*.14}
+\contentsline {paragraph}{Correctness}{6}{paragraph*.15}
 \contentsline {paragraph}{Running Time}{6}{paragraph*.16}
+\contentsline {subsubsection}{\numberline {2.1.3}Heap-Sort}{6}{subsubsection.2.1.3}
+\contentsline {paragraph}{Description}{6}{paragraph*.17}
+\contentsline {paragraph}{Running Time}{6}{paragraph*.18}
+\contentsline {paragraph}{Advantages}{6}{paragraph*.19}
+\contentsline {subsection}{\numberline {2.2}Priority Queues}{6}{subsection.2.2}
+\contentsline {subsubsection}{\numberline {2.2.1}Implementation}{6}{subsubsection.2.2.1}
+\contentsline {subsection}{\numberline {2.3}Queues}{7}{subsection.2.3}
+\contentsline {subsubsection}{\numberline {2.3.1}Implementation}{7}{subsubsection.2.3.1}
+\contentsline {subsection}{\numberline {2.4}Graphs}{7}{subsection.2.4}
+\contentsline {subsubsection}{\numberline {2.4.1}Definitions}{7}{subsubsection.2.4.1}
+\contentsline {subsubsection}{\numberline {2.4.2}Representations}{7}{subsubsection.2.4.2}
+\contentsline {subsubsection}{\numberline {2.4.3}Depth-first Search (DFS)}{7}{subsubsection.2.4.3}
+\contentsline {paragraph}{Running Time}{8}{paragraph*.20}
+\contentsline {paragraph}{Depth-First Search Forest}{8}{paragraph*.21}
+\contentsline {subsubsection}{\numberline {2.4.4}Topological Sort}{8}{subsubsection.2.4.4}
+\contentsline {subsubsection}{\numberline {2.4.5}Strongly Connected Components}{8}{subsubsection.2.4.5}
+\contentsline {subsubsection}{\numberline {2.4.6}Breadth-First Search (BFS)}{8}{subsubsection.2.4.6}

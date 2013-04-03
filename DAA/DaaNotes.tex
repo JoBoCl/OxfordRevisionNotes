@@ -10,8 +10,9 @@
 \usepackage{mdwlist}
 \usepackage{mathtools}
 \usepackage{listings}
+\newcommand{\hs}{\mathop{heapsize}}
 \lstloadlanguages{Haskell}
-\lstnewenvironment{codeh}
+\lstnewenvironment{code}
     {\lstset{}%
       \csname lst@SetFirstLabel\endcsname}
     {\csname lst@SaveFirstLabel\endcsname}
@@ -250,8 +251,8 @@ knapsack_dp wvs wtot = table ! (wtot,n)
   where n = length wvs
         table = array ((0,0),(wtot,n)) [((w,j), ks w j) | w <- [0..wtot], j <- [0..n]]
         ks w 0 = 0
-        kw w j = if wj > w then table (w,j-1)
-                 else max (table ! w,j-1)
+        kw w j = if wj > w then table ! (w,j-1)
+                 else max (table ! (w,j-1))
                    ((table ! (w-wj, j-1)) + vj)
           where (wj,vj) = wvs !! (j-1)
 \end{code}
@@ -321,7 +322,7 @@ If we have $d[i,k;k]$ and $d[k,j;k]$ then the shortest path that from $i$ to $j$
 \KwOut{Shortest path between all pairs of nodes}
 \For{$i=0$ \KwTo$|V|-1$}{
 \lFor{$j=0$ \KwTo$|V|-1$}{$d[i,j;0]=\infty$}}
-\lFor{each edge $(i,j)\in E$}{$d[i,j;0]=w(i,j)$}
+\lForAll{edge $(i,j)\in E$}{$d[i,j;0]=w(i,j)$}
 
 \For{$k=0$ \KwTo$|V|-1$}{
 \For{$i=0$ \KwTo$|V|-1$}{
@@ -367,9 +368,9 @@ Kruskal's requires a disjoint-set data structure to be most effective.  It is a 
 	\SetKwFunction{FS}{FIND-SET}
 	\SetKwFunction{UN}{UNION}
 	$A=\emptyset$\;
-	\lFor{each $v\in V$}{\MS{$v$}}
+	\lForAll{$v\in V$}{\MS{$v$}}
 	Sort $E$ by increasing weight $w$\;
-	\For{each edge $(u,v)$ from the sorted list}{
+	\ForAll{edges $(u,v)$ from the sorted list}{
 	\If{\FS{$u$}$\neq$\FS{$v$}}{
 		$A=A\cup\{(u,v)\}$\;
 		\UN{$u,v$}\;
@@ -405,14 +406,14 @@ The lightest edge can be found quickly by using a priority queue, where each ent
 	\SetKwFunction{DK}{DECREASE-KEY}
 	\SetKwFunction{EM}{EXTRACT-MIN}
 	$Q=\emptyset$\;
-	\For{each $u\in V$}{
+	\ForAll{$u\in V$}{
 	$\mathop{key}[u]=\infty$, $\pi[u]=\dagger$\;
 	\INSERT{$Q,u$}\;
 	}
 	\DK{$Q,r,0$}
 	\While{$Q\neq\emptyset$}{
 		$u=\EM{Q}$\;
-		\For{each $v\in\mathop{Adj}[u]$}{
+		\ForAll{$v\in\mathop{Adj}[u]$}{
 			\If{$v\in Q\,\wedge\, w(u,v)<\mathop{key}[v]$}{
 			$\pi[v]=u$, \DK{$Q,v,w(u,v)$}\;
 			}
@@ -435,7 +436,7 @@ The root is always at $A[0]$, and for any node $i>0$, its parent is at $A[\lfloo
 	\KwIn{Tree with left and right sub-trees of $i$ stored as heaps}
 	\KwOut{$A$ where entire tree is also a heap.}
 	\SetKwFunction{HEAPIFY}{HEAPIFY}
-	$n=A.\mathop{heapsize}$\;
+	$n=A.\hs$\;
 	$l=2i+1$, $r=2i+2$\;
 	\leIf{$l<n\,\wedge\,A[l]>A[i]$}{$\textit{largest}=l$}{$\textit{largest}=i$}
 	\lIf{$r>n\,\wedge\,A[r]>A[\textit{largest}]$}{$\textit{largest}=r$}
@@ -447,7 +448,7 @@ The root is always at $A[0]$, and for any node $i>0$, its parent is at $A[\lfloo
 	\KwIn{An unsorted integer array $A$ of size $n$}
 	\KwOut{A heap of size $n$}
 	\SetKwFunction{HEAPIFY}{HEAPIFY}
-	$A.\mathop{heapsize}=A.\mathop{length}$\;
+	$A.\hs=A.\mathop{length}$\;
 	\lFor{$i=\lfloor{A.\mathop{length}/2\rfloor}$ \KwTo$0$}{\HEAPIFY{$A,i$}}
 	\KwRet{$A$}
 \end{algorithm}
@@ -461,5 +462,228 @@ The root is always at $A[0]$, and for any node $i>0$, its parent is at $A[\lfloo
 \paragraph{Running Time}There are $n$ calls to \texttt{HEAPIFY}, each taking $O(\log n)$ time, giving $O(n\log n)$.
 
 As \texttt{HEAPIFY} is linear with the height of the node that it runs on, the height of the heap is $\lfloor \lg n\rfloor$, hence the cost of \texttt{MAKE-HEAP} is
-\[\sum_{h=0}^{\lfloor \lg n\rfloor}\lceil \frac{n}{2^{h+1}}O(h)=O\left(n\sum_{h=0}^{\lfloor \lg n\rfloor} \frac{h}{2^h}\right)\]As $\sum_{i=0}^\infty \frac i{2^i}=2$, the total running time is therefore $O(n)$.
+\[\sum_{h=0}^{\lfloor \lg n\rfloor}\left\lceil \frac{n}{2^{h+1}}\right\rceil O(h)=O\left(n\sum_{h=0}^{\lfloor \lg n\rfloor} \frac{h}{2^h}\right)\]As $\sum_{i=0}^\infty \frac i{2^i}=2$, the total running time is therefore $O(n)$.
+\subsubsection{Heap-Sort}
+\paragraph{Description}From a given input array, build a max-heap, and starting from the root element, swap the root node (maximum node) with the node at the end of the heap, and call \texttt{HEAPIFY} to maintain the heap property.  Repeat until the heap's size is 1, when the root node is the minimal element, and the array is therefore sorted.
+\begin{algorithm}
+	\caption{Heap-Sort}
+	\KwIn{The unsorted array $A$ with distinct elements}
+	\KwOut{Sorted permutation of $A$}
+	\SetKwFunction{HFY}{HEAPIFY}
+	\SetKwFunction{MH}{MAKE-HEAP}
+	\MH{$A$}
+	\For{$i=A.\hs-1$ \KwTo1}{
+		swap $A[0]$ with $A[i]$\;
+		$A.\hs = A.\hs-1$\;
+		\HFY{$A,0$}\;
+	}
+	\KwRet{$A$}
+\end{algorithm}
+\paragraph{Running Time}\texttt{MAKE-HEAP} runs in $O(n)$, the \texttt{for}-loop is run $n-1$ times, with the swap operation, and decrementing the heap size taking $O(1)$.  \texttt{HEAPIFY} runs in $O(\log n)$ time, thus meaning the entire algorithm runs in $O(n\log n)$.
+\paragraph{Advantages}Heap-sort is a stable sort that runs in $O(n\log n)$ time. In practice, however, a well implemented quicksort can beat heap-sort. 
+\subsection{Priority Queues}
+A priority queue is an abstract data structure, to maintain a sequence a values, each with an associated key or weight.
+
+Priority queues normally have the following associated operations:
+\begin{itemize*}
+	\item \texttt{INSERT$(S,x,k)$} to insert the element $x$ with key $k$ into the queue $S$.
+	\item \texttt{MAXIMUM$(S)$} to find the element in $S$ with the largest key. Minimum priority queues have an corresponding function \texttt{MINIMUM}.
+	\item \texttt{EXTRACT-MAX$(S)$} to find and remove the element in $S$ with the largest key. Minimum priority queues have an corresponding function \texttt{EXTRACT-MIN}.
+	\item \texttt{INCREASE-KEY$(S,x,k)$} to increase the value of $x$'s key to $k$.  The new value of $k$ must be larger than the old value. Minimum priority queues have an corresponding function \texttt{DECREASE-KEY}.
+\end{itemize*}
+Priority queues are often found used to schedule jobs, in Djikstra's shortest path algorithm and Prim's MST algorithm.
+\subsubsection{Implementation}
+It is possible to implement priority queues using an array or a doubly-linked list, however, the implementation of the extraction functions run in $\Theta(n)$ time, which can be improved with a heap implementation.
+
+Implementing a priority queue using a heap allows the extraction operation to run in $O(\log n)$ time, however, it increases the time to insert an element from $O(1)$ to $O(\log n)$, but this is often seen as an acceptable trade-off.
+
+The implementations provided all assume a maximum priority queue.
+\begin{algorithm}
+	\caption{Return the maximal element of the queue}
+	\KwIn{The priority queue $A$}
+	\KwOut{The maximum value of $A$}
+	\KwRet{$A[0]$}\;
+\end{algorithm}
+\begin{algorithm}
+	\caption{Extract Max Algorithm}
+	\KwIn{The priority queue $A$}
+	\SetKw{Er}{error}
+	\KwOut{The old maximum value $A$}
+	\SetKwFunction{HFY}{HEAPIFY}
+	\lIf{$A.\hs<1$}{\Er{``heap underflow''}}
+	$\textit{max} = A[0]$\;
+	$A.\hs = A.\hs-1$\;
+	$A[0]=A[A.\hs]$\;
+	\HFY{$A,0$}\;
+	\KwRet{$\textit{max}$}\;
+\end{algorithm}
+The running time is $O(\log n)$, as all calls, except the call to \texttt{HEAPIFY} run in $O(1)$ time.
+\begin{algorithm}
+	\caption{Increase Key Algorithm}
+	\KwIn{The priority queue $A$, the value to increase $i$, and the new key $k$}
+	\KwOut{The new priority queue $A$}
+	\SetKw{Er}{error}
+	\lIf{$k<A[i]$}{\Er{``new key is smaller than current key''}}
+	$A[i]=k$\;
+	\While{$i > 0\land A[i.\mathop{parent}]>A[i]$}{
+		swap $A[i]$ and $A[i.\mathop{parent}]$\;
+		$i=i.\mathop{parent}$\;
+	}
+	\KwRet{$A$}
+\end{algorithm}
+Running time: $O(\log n)$
+\begin{algorithm}
+	\caption{Insertion Algorithm}
+	\KwIn{The priority queue $A$ and the key $k$}
+	\KwOut{The new priority queue $A$}
+	\SetKwFunction{HIK}{HEAP-INCREASE-KEY}
+	$A.\hs = A.\hs+1$\;
+	$A[A.\hs-1] = -\infty$\;
+	\HIK{$A,A.\hs-1,k$}\;
+	\KwRet{$A$}\;
+\end{algorithm}
+\subsection{Queues}
+A FIFO queue is an abstract data structure, with the following methods:
+\begin{description}
+	\item[\texttt{ENQUEUE}$(Q,x)$] -- inserts $x$ at the end of the queue
+	\item[\texttt{DEQUEUE}$(Q)$] -- finds and removes the element at the head of the queue $Q$.
+	\item[\texttt{ISEMPTY}$(Q)$] -- tests if the queue $Q$ is empty.  Often abbreviated to $Q=\emptyset$ in pseudo-code.
+\end{description}
+\subsubsection{Implementation}
+Linked list with an extra pointer to the tail of the list, with the head of the queue being the head of the linked list, making all operations $O(1)$.
+\subsection{Graphs}
+Graphs are often used to form abstractions to certain problems, for example, colouring a map to ensure two adjacent countries do not have the same colour is easier when the map is considered as a graph, where each country is a node, and two nodes are linked iff they share a border.
+Graphs can also be used to help with exams scheduling: each exam is represented by a node, and joined if they are both taken by at least one student.
+\subsubsection{Definitions}
+\begin{description}
+	\item[Directed graph]$(V,E)$, where $V$ is a set of nodes and $E\subseteq V\times V$ of edges.  If $u$ is connected to $v$ (does not imply $v$ is connected to $u$) by the edge $e=(u,v)$, we say that $e$ is incident on $u$ and $v$.
+	\item[Path]from a vertex $u$ to $u'$ is a sequence $\langle v_0,v_1,\ldots,v_k\rangle$, with length $k$, of vertices such that $u=v_0$, $u'=v_k$ and each $(v_i,v_{i+1})\in E$.
+	\item[Cycle]is a path such that $v_0=v_k$ and the path contains at least one edge.  Self-loops are cycles with length 1.  Simple cycles are cycles with all nodes being distinct.
+	\item[Acyclic] graph are directed graphs containing no cycles.
+	\item[Strongly connected] graphs are graphs that, for any two nodes, there is a path from the first to the second.
+	\item[Undirected] graphs are graphs where $E$ is symmetric ($(u,v)\in E\Leftrightarrow (v,u)\in E$) 
+\end{description}
+\subsubsection{Representations}
+Graphs can be represented as an adjacency matrix (where the entry $a_{ij}=1$ if $(v_i,v_j)\in E$ and $0$ otherwise.  An edge can be found in constant time, and requires a storage size of $O(|V|^2)$.  The undirected graph's representation is symmetric.
+
+Adjacency lists consist of $|V|$ linked lists, with the list for vertex $u$ containing links to all vertices that $v$ is adjacent to.  The data structure cannot be checked in constant time, and has size $O(|V|+|E|)$.  Undirected graphs are represented by lists where $u$ is in $v$'s list iff $v$ is in $u$'s.
+\subsubsection{Depth-first Search (DFS)}
+Linear time algorithm to explore a graph by exploring all the reachable unseen vertices from each vertex.
+
+As DFS progresses, each nodes is assigned a changing colour.
+\begin{description}
+	\item[Black]finished -- all reachable vertices have been discovered
+	\item[Grey] discovered but not finished
+	\item[White] not yet discovered
+\end{description}
+\begin{algorithm}
+	\caption{Depth-First Search Algorithm}
+	\KwIn{Graph $G=(V,E)$}
+	\KwOut{Discovery and finishing time for each vertex $v\in V$}
+	\SetKwProg{Fn}{def}{}{}
+	\SetKwArray{Cl}{colour}
+	\SetKwArray{Disc}{d}
+	\SetKwArray{Fin}{f}
+	\SetKwFunction{DFS}{DFS}
+	\SetKwFunction{DFSV}{DFS-VISIT}
+	\SetKwData{B}{BLACK}
+	\SetKwData{G}{GREY}
+	\SetKwData{W}{WHITE}
+	\Fn{\DFS{$V,E$}}{
+	\lForAll{$u\in V$}{\Cl{$u$}=\W}
+	$t=0$\;
+	\ForAll{$u\in V$}{
+	\If{\Cl{$u$}$=$\W}{
+			\DFSV{$u$}\;}
+	}}
+	\Fn{\DFSV{$u$}}{
+	\Cl{$u$}$ = $\G\;
+		$t = t+1$\;
+		\Disc{$u$}$ = t$\;
+		\ForAll{$v\in\mathop{Adj}[u]$}{
+		\If{\Cl{$u$}$ = $\W}{
+			\DFSV{$u$}\;}
+			}
+			\Cl{$u$}$ = $\B\;
+			\Fin{$u$}$ = t$\;
+	}
+\end{algorithm}
+\paragraph{Running Time} The first loop runs in $\Theta(|V|)$.  \texttt{DFS-VISIT} is called once for each $v\in V$, since it is not called on grey or black vertices.  During \texttt{DFS-VISIT}, the loop is run $|\mathop{Adj}[v]|$ times.  As $\sum_{v\in V}|\mathop{Adj}[v]|=\Theta(|E|)$, the total running cost of \texttt{DFS-VISIT}, as $v$ changes over $V$ is $\Theta(|E|)$, thus giving a total running time of $O(|V|+|E|)$ for depth-first search.
+\paragraph{Depth-First Search Forest}
+By analysing the arrays produced by DFS, a number of DFS trees can be produced, making up a DFS forest.  Each tree is made up of edges $(u,v)$ such that $u$ is grey and $v$ is white when $(u,v)$ is first explored. If a node $u$ is a descendent of $v$ in the DFS forest, it is also a descendent of $v$ in the original graph.
+
+By using the following shorthand:\[\begin{matrix} d[u]&f[u]&d[v]&f[v]\\(_u&)_u&(_v&)_v\end{matrix}\]and the convention the value associated with the preceding bracket is less than the next.  The following rules are derived:
+\begin{description}
+	\item[$(_u\;)_u\;(_v\;)_v$]Neither $u$ nor $v$ are descendants of each other.
+	\item[$(_u\;(_v\;)_v\;)_u$]$v$ is a descendent of $u$.
+	\item[$(_u\;(_v\;)_u\;)_v$]cannot happen.
+\end{description}
+There are four different types of edge in a DFS forest:
+\begin{description}
+\item[Tree] -- edges of the DFS forest
+\item[Back] -- lead from a node to an ancestor
+\item[Forward] -- lead from a node to a non-child descendent
+\item[Cross] -- can link from either same or different trees.  Always lead to edges with earlier discovery times, and only exist in directed graphs.
+\end{description}
+A directed graph has a cycle iff its DFS forest contains a back edge.
+\subsubsection{Topological Sort}
+The topological sort of a directed acyclic graph is a total order of the vertices such that if $(u,v)\in E$ then $u>v$.
+\begin{algorithm}
+	\caption{Topological Sort}
+	\KwIn{A directed acyclic graph $G=(V,E)$}
+	\KwOut{Elements of $V$ in topological order}
+	\SetKwFunction{DFS}{DFS}
+	\SetKwArray{Fin}{f}
+	\SetKwArray{Dis}{d}
+	Call \DFS{$V,E$} to find \Fin{$v$} for $v\in V$\;
+	Output vertices in order of decreasing finishing times\;
+\end{algorithm}
+The running time of the above is $\Theta(|V|+|E|)$.
+\subsubsection{Strongly Connected Components}
+In directed graphs, two vertices $u$ and $v$ are strongly connected if there is a path, both from $u$ to $v$ and from $v$ to $u$.  A strongly connected component is the largest possible set of vertices that are all connected.
+
+For the directed graph $G=(V,E)$, the transpose is $G^T=(V,E^T)$, where $E^T=\{(v,u)\mid(u,v)\in E\}$.  $G^T$ can be computed in $\Theta(|E|+|V|)$ using adjacency lists.  $G$ and $G^T$ both have the same strongly connected components, which can be used to identify the SCC of $G$.
+\begin{algorithm}
+	\caption{Strongly Connected Component Discovery}
+	\KwIn{The directed graph $G$}
+	\KwOut{Elements of each SCC in $G$ outputted in turn}
+	\SetKwFunction{DFS}{DFS}
+	\SetKwArray{Fin}{f}
+	Call \DFS{$G$} to find \Fin{$u$} for all $u$\;
+	Compute $G^T$\;
+	Call \DFS{$G^T$}, but in the loop of \DFS, order by decreasing \Fin{$u$} as computed above\;
+	Output the vertices in each tree of the DFS forest as found above\;
+\end{algorithm}
+\subsubsection{Breadth-First Search (BFS)}
+Linear time algorithm to explore a graph by exploring all the reachable unseen vertices from each vertex.
+
+By sending out a `wave' from a source edge $s$, all nodes 1 edge from $s$ will be discovered, then all nodes 2 edges away, etc.  A queue is used to maintain the wavefront, with the property that $v\in Q\Leftrightarrow$ wave has hit $v$, but has not yet moved past it.
+\begin{algorithm}
+	\caption{Bread-First Search}
+	\KwIn{The graph $G=(V,E)$ and a source node $s\in V$}
+	\KwOut{The discovery time and shortest distance from $s$ for each node $v$}
+	\SetKwArray{Disc}{d}
+	\SetKwArray{Path}{$\pi$}
+	\SetKwData{null}{null}
+	\SetKwFunction{EQ}{ENQUEUE}
+	\SetKwFunction{DQ}{DEQUEUE}
+	
+	\Disc{$v$}$=0$, \Path{$v$}$=$\null\;
+	\lForAll{$u\in V\setminus\{s\}$}{
+		\Disc{$u$} = $\infty$, \Path{$u$} = \null
+	}
+	$Q=\emptyset$\;
+	\EQ{$Q,s$}\;
+	\While{$Q\neq\emptyset$}{
+		$u=\;$\DQ{$Q$}\;
+		\ForAll{$v\in\mathop{Adj}[u]$}{
+			\If{\Disc$[v] = \infty$}{
+				\Disc$[v] =\;$\Disc$[u]+1$\;
+				\Path$[v]=u$\;
+				\EQ{$Q,v$}\;
+			}
+		}
+	}
+\end{algorithm}
+The initial setup records that $s$ can be reached from itself in 0 time and in 0 steps, and that, as far as we know, all other vertices cannot be reached, and therefore take an infinite amount of time to be reached.  In the \texttt{for}-loop, the next unfinished node is examined.  All adjacent nodes that have not yet been seen have their shortest distance recorded and their backpointer set.
 \end{document}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/W32TeX) (format=latex 2013.3.27)  29 MAR 2013 19:35
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/W32TeX) (format=pdflatex 2013.3.27)  31 MAR 2013 19:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -447,7 +447,7 @@ Package: geometry 2010/09/12 v5.6 Page Geometry
 
 (c:/texlive/2012/texmf-dist/tex/generic/oberdiek/ifpdf.sty
 Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
-Package ifpdf Info: pdfTeX in PDF mode is not detected.
+Package ifpdf Info: pdfTeX in PDF mode is detected.
 )
 (c:/texlive/2012/texmf-dist/tex/generic/oberdiek/ifvtex.sty
 Package: ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
@@ -583,7 +583,7 @@ Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 Package pdftexcmds Info: LuaTeX not detected.
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
-Package pdftexcmds Info: \pdfdraftmode is ignored in DVI mode.
+Package pdftexcmds Info: \pdfdraftmode found.
 Package: pdfescape 2011/11/25 v1.13 Implements pdfTeX's escape features (HO)
 Package: bigintcalc 2012/04/08 v1.3 Expandable calculations on big integers (HO
 )
@@ -652,20 +652,12 @@ LaTeX Info: Redefining \pageref on input line 6369.
 \c@Hfootnote=\count128
 )
 
-Package hyperref Message: Driver (default): hdvips.
+Package hyperref Message: Driver (autodetected): hpdftex.
 
-(c:/texlive/2012/texmf-dist/tex/latex/hyperref/hdvips.def
-File: hdvips.def 2012/11/06 v6.83m Hyperref driver for dvips
-
-(c:/texlive/2012/texmf-dist/tex/latex/hyperref/pdfmark.def
-File: pdfmark.def 2012/11/06 v6.83m Hyperref definitions for pdfmark specials
-\pdf@docset=\toks28
-\pdf@box=\box39
-\pdf@toks=\toks29
-\pdf@defaulttoks=\toks30
-\HyField@AnnotCount=\count129
-\Fld@listcount=\count130
-\c@bookmark@seq@number=\count131
+(c:/texlive/2012/texmf-dist/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2012/11/06 v6.83m Hyperref driver for pdfTeX
+\Fld@listcount=\count129
+\c@bookmark@seq@number=\count130
 
 (c:/texlive/2012/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
 Package: rerunfilecheck 2011/04/15 v1.7 Rerun checks for auxiliary files (HO)
@@ -673,32 +665,32 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 82.
 )
 \Hy@SectionHShift=\skip69
-))
+)
 (./DaaNotes.aux)
 \openout1 = `DaaNotes.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Try loading font information for T1+lmr on input line 33.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Try loading font information for T1+lmr on input line 34.
  (c:/texlive/2012/texmf-dist/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 *geometry* driver: auto-detecting
-*geometry* detected driver: dvips
+*geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
-* driver: dvips
+* driver: pdftex
 * paper: <default>
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
@@ -729,11 +721,13 @@ File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Info: Redefining \microtypecontext on input line 33.
-Package microtype Info: Generating DVI output.
+LaTeX Info: Redefining \microtypecontext on input line 34.
+Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
-Package microtype Info: No font expansion.
+Package microtype Info: Automatic font expansion enabled (level 2),
+(microtype)             stretch: 0, shrink: 50, step: 1, non-selected.
+Package microtype Info: Using default expansion set `basictext'.
 Package microtype Info: Tracking enabled.
 Package microtype Info: Using tracking set `all'.
 Package microtype Info: No adjustment of interword spacing.
@@ -742,12 +736,6 @@ Package microtype Info: No adjustment of character kerning.
 File: mt-cmr.cfg 2011/04/09 v2.1 microtype config. file: Computer Modern Roman 
 (RS)
 )
-
-Package microtype Warning: You are using tracking/letterspacing in DVI mode.
-(microtype)                This will probably not work, unless the post-
-(microtype)                processing program (dvips, dvipdfm(x), ...) is
-(microtype)                able to create the virtual fonts on the fly.
-
 (c:/texlive/2012/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
@@ -760,17 +748,46 @@ Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 (c:/texlive/2012/texmf-dist/tex/latex/latexconfig/graphics.cfg
 File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
 )
-Package graphics Info: Driver file: dvips.def on input line 91.
+Package graphics Info: Driver file: pdftex.def on input line 91.
 
-(c:/texlive/2012/texmf-dist/tex/latex/graphics/dvips.def
-File: dvips.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
-))
-\Gin@req@height=\dimen149
-\Gin@req@width=\dimen150
+(c:/texlive/2012/texmf-dist/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+\Gread@gobject=\count131
+
+(c:/texlive/2012/texmf-dist/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count132
+\scratchdimen=\dimen149
+\scratchbox=\box39
+\nofMPsegments=\count133
+\nofMParguments=\count134
+\everyMPshowfont=\toks28
+\MPscratchCnt=\count135
+\MPscratchDim=\dimen150
+\MPnumerator=\count136
+\makeMPintoPDFobject=\count137
+\everyMPtoPDFconversion=\toks29
+))) (c:/texlive/2012/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
+
+(c:/texlive/2012/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
 )
-\c@lstlisting=\count132
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+
+(c:/texlive/2012/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+\Gin@req@height=\dimen151
+\Gin@req@width=\dimen152
+)
+\c@lstlisting=\count138
 \AtBeginShipoutBox=\box40
-Package hyperref Info: Link coloring OFF on input line 33.
+Package hyperref Info: Link coloring OFF on input line 34.
 
 (c:/texlive/2012/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -778,48 +795,45 @@ Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 (c:/texlive/2012/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count133
+\c@section@level=\count139
 )
-LaTeX Info: Redefining \ref on input line 33.
-LaTeX Info: Redefining \pageref on input line 33.
-LaTeX Info: Redefining \nameref on input line 33.
+LaTeX Info: Redefining \ref on input line 34.
+LaTeX Info: Redefining \pageref on input line 34.
+LaTeX Info: Redefining \nameref on input line 34.
 
 (./DaaNotes.out) (./DaaNotes.out)
 \@outlinefile=\write3
 \openout3 = `DaaNotes.out'.
 
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 37.
 
-
-Package hyperref Warning: Rerun to get /PageLabels entry.
-
-LaTeX Font Info:    Try loading font information for OT1+lmr on input line 36.
 (c:/texlive/2012/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 36.
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 37.
 
 (c:/texlive/2012/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 36.
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 37.
 
 
 (c:/texlive/2012/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMX+lmex on input line 36.
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 37.
 
 
 (c:/texlive/2012/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 36.
+(Font)              <10> on input line 37.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 36.
+(Font)              <7> on input line 37.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 36.
-LaTeX Font Info:    Try loading font information for U+msa on input line 36.
+(Font)              <5> on input line 37.
+LaTeX Font Info:    Try loading font information for U+msa on input line 37.
 
 (c:/texlive/2012/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
@@ -827,27 +841,23 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 (c:/texlive/2012/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 36.
+LaTeX Font Info:    Try loading font information for U+msb on input line 37.
 
 (c:/texlive/2012/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 (c:/texlive/2012/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
-) (./DaaNotes.toc
-Overfull \hbox (19.42354pt too wide) in paragraph at lines 19--19
- [][] [] []  
- []
-
-)
+) (./DaaNotes.toc)
 \tf@toc=\write4
 \openout4 = `DaaNotes.toc'.
 
- (./DaaNotes.loa)
+
+(./DaaNotes.loa)
 \tf@loa=\write5
 \openout5 = `DaaNotes.loa'.
 
-LaTeX Font Info:    Try loading font information for T1+lmtt on input line 70.
+LaTeX Font Info:    Try loading font information for T1+lmtt on input line 71.
  (c:/texlive/2012/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
@@ -855,218 +865,134 @@ Package microtype Info: Loading generic settings for font family
 (microtype)             `lmtt' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-LaTeX Font Info:    Try loading font information for OMS+lmr on input line 91.
+LaTeX Font Info:    Try loading font information for OMS+lmr on input line 92.
 
 (c:/texlive/2012/texmf-dist/tex/latex/lm/omslmr.fd
 File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 91.
-
-
-! LaTeX Error: Environment code undefined.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.101 \begin{code}
-                  
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-Overfull \hbox (0.63145pt too wide) in paragraph at lines 100--107
-[] \T1/lmr/bx/n/10/-25ls Haskell Im-ple-men-ta-tion \T1/lmr/m/n/10/-25ls By pat
--tern match-ing, first against
- []
-
-[1
+(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 92.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <9> on input line 103.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <6> on input line 103.
+ [1{c:/texlive/2012/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 
 
+] [2pdfTeX warning (ext4): destination with the same identifier (name{AlgoLine.
+1.1}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.183 ...n)$ to multiply two $n$-bit numbers as \[
+                                                  T(n)=4T(n/2)+O(n)\]which, ...
+pdfTeX warning (ext4): destination with the same identifier (name{AlgoLine.1.2}
+) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.183 ...n)$ to multiply two $n$-bit numbers as \[
+                                                  T(n)=4T(n/2)+O(n)\]which, ...
+pdfTeX warning (ext4): destination with the same identifier (name{AlgoLine.1.3}
+) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.183 ...n)$ to multiply two $n$-bit numbers as \[
+                                                  T(n)=4T(n/2)+O(n)\]which, ...
+pdfTeX warning (ext4): destination with the same identifier (name{AlgoLine.1.4}
+) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.183 ...n)$ to multiply two $n$-bit numbers as \[
+                                                  T(n)=4T(n/2)+O(n)\]which, ...
+pdfTeX warning (ext4): destination with the same identifier (name{AlgoLine.1.5}
+) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.183 ...n)$ to multiply two $n$-bit numbers as \[
+                                                  T(n)=4T(n/2)+O(n)\]which, ...
+pdfTeX warning (ext4): destination with the same identifier (name{AlgoLine.1.6}
+) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.183 ...n)$ to multiply two $n$-bit numbers as \[
+                                                  T(n)=4T(n/2)+O(n)\]which, ...
 ]
-
-! LaTeX Error: \begin{document} ended by \end{code}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.119 \end{code}
-                
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-Overfull \hbox (7.56255pt too wide) in paragraph at lines 172--173
-\OT1/lmr/m/n/10/-25ls 2$\T1/lmr/m/n/10/-25ls . Thus, in the worst case, \T1/lmt
-t/m/n/10/-25ls SE-LECT \T1/lmr/m/n/10/-25ls is called on, at most $\OMS/lmsy/m/
-n/10/-25ls b\OT1/lmr/m/n/10/-25ls 7\OML/lmm/m/it/10/-25ls n=\OT1/lmr/m/n/10/-25
-ls 10\OMS/lmsy/m/n/10/-25ls c \OT1/lmr/m/n/10/-25ls +
- []
-
-[2]
-Overfull \hbox (10.52425pt too wide) in paragraph at lines 203--204
-\T1/lmr/m/n/10/-25ls For the $\OML/lmm/m/it/10/-25ls n$ \T1/lmr/m/n/10/-25ls it
-ems, each of weight $\OML/lmm/m/it/10/-25ls w[]; w[] [] w[]$ \T1/lmr/m/n/10/-25
-ls and value $\OML/lmm/m/it/10/-25ls v[]; v[]; [] v[]$
+Overfull \hbox (3.37141pt too wide) in paragraph at lines 204--205
+\T1/lmr/m/n/10/-25ls (-50) For the $\OML/lmm/m/it/10/-25ls n$ \T1/lmr/m/n/10/-2
+5ls (-50) items, each of weight $\OML/lmm/m/it/10/-25ls w[]; w[] [] w[]$ \T1/lm
+r/m/n/10/-25ls (-50) and value $\OML/lmm/m/it/10/-25ls v[]; v[]; [] v[]$
  []
 
 
-Overfull \hbox (10.52425pt too wide) in paragraph at lines 216--217
-\T1/lmr/m/n/10/-25ls For the $\OML/lmm/m/it/10/-25ls n$ \T1/lmr/m/n/10/-25ls it
-ems, each of weight $\OML/lmm/m/it/10/-25ls w[]; w[] [] w[]$ \T1/lmr/m/n/10/-25
-ls and value $\OML/lmm/m/it/10/-25ls v[]; v[]; [] v[]$
+Overfull \hbox (3.37141pt too wide) in paragraph at lines 217--218
+\T1/lmr/m/n/10/-25ls (-50) For the $\OML/lmm/m/it/10/-25ls n$ \T1/lmr/m/n/10/-2
+5ls (-50) items, each of weight $\OML/lmm/m/it/10/-25ls w[]; w[] [] w[]$ \T1/lm
+r/m/n/10/-25ls (-50) and value $\OML/lmm/m/it/10/-25ls v[]; v[]; [] v[]$
  []
 
+[3] [4] [5] [6]
+LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 548.
+LaTeX Font Info:    Try loading font information for T1+lmss on input line 598.
 
-! LaTeX Error: Environment code undefined.
+ (c:/texlive/2012/texmf-dist/tex/latex/lm/t1lmss.fd
+File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+Package microtype Info: Loading generic settings for font family
+(microtype)             `lmss' (encoding: T1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+ [7]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 688.
 
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.233 \begin{code}
-                  
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.234 knapsack_
-               spec :: [(Integer,Integer)] -> Integer -> Integer
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.239 
-      
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-
-Overfull \hbox (98.08174pt too wide) in paragraph at lines 232--239
-\OML/lmm/m/it/10/-25ls Integer\OMS/lmsy/m/n/10/-25ls ^^@ \OML/lmm/m/it/10/-25ls
- > Integerknapsack[]pecwvsw \OT1/lmr/m/n/10/-25ls = \OML/lmm/m/it/10/-25ls maxi
-mum\OT1/lmr/m/n/10/-25ls (\OML/lmm/m/it/10/-25ls map\OT1/lmr/m/n/10/-25ls (\OML
-/lmm/m/it/10/-25ls sum:mapsnd\OT1/lmr/m/n/10/-25ls )(\OML/lmm/m/it/10/-25ls fil
-ter\OT1/lmr/m/n/10/-25ls ((\OML/lmm/m/it/10/-25ls <\OT1/lmr/m/n/10/-25ls =
- []
-
-! Undefined control sequence.
-l.242   where f x = foldr (\y
-                              zs -> (x:y):y:zs) []
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.244 knapsack_
-               rec [] w = 0
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.248 
-      
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-
-Overfull \hbox (66.56433pt too wide) in paragraph at lines 244--248
-\OML/lmm/m/it/10/-25ls knapsack[]ecwvsw\OMS/lmsy/m/n/10/-25ls j\OML/lmm/m/it/10
-/-25ls otherwise \OT1/lmr/m/n/10/-25ls = \OML/lmm/m/it/10/-25ls max\OT1/lmr/m/n
-/10/-25ls (\OML/lmm/m/it/10/-25ls knapsack[]ecwvsw\OT1/lmr/m/n/10/-25ls )(\OML/
-lmm/m/it/10/-25ls knapsack[]ecwvs\OT1/lmr/m/n/10/-25ls (\OML/lmm/m/it/10/-25ls 
-w \OMS/lmsy/m/n/10/-25ls ^^@
- []
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.249 knapsack_
-               dp wvs wtot = table ! (wtot,n)
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-
-! LaTeX Error: \begin{document} ended by \end{code}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.257 \end{code}
-                
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.257 \end{code}
-                
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-
-Overfull \hbox (22.22603pt too wide) in paragraph at lines 249--258
-[]\T1/lmr/m/n/10/-25ls knapsack$[]\OML/lmm/m/it/10/-25ls pwvswtot \OT1/lmr/m/n/
-10/-25ls = \OML/lmm/m/it/10/-25ls table\OT1/lmr/m/n/10/-25ls !(\OML/lmm/m/it/10
-/-25ls wtot; n\OT1/lmr/m/n/10/-25ls )\OML/lmm/m/it/10/-25ls wheren \OT1/lmr/m/n
-/10/-25ls = \OML/lmm/m/it/10/-25ls lengthwvstable \OT1/lmr/m/n/10/-25ls =
- []
-
-
-Overfull \hbox (39.69473pt too wide) in paragraph at lines 249--258
-\OML/lmm/m/it/10/-25ls array\OT1/lmr/m/n/10/-25ls ((0\OML/lmm/m/it/10/-25ls ; \
-OT1/lmr/m/n/10/-25ls 0)\OML/lmm/m/it/10/-25ls ; \OT1/lmr/m/n/10/-25ls (\OML/lmm
-/m/it/10/-25ls wtot; n\OT1/lmr/m/n/10/-25ls ))[((\OML/lmm/m/it/10/-25ls w; j\OT
-1/lmr/m/n/10/-25ls )\OML/lmm/m/it/10/-25ls ; kswj\OT1/lmr/m/n/10/-25ls )\OMS/lm
-sy/m/n/10/-25ls j\OML/lmm/m/it/10/-25ls w < \OMS/lmsy/m/n/10/-25ls ^^@\OT1/lmr/
-m/n/10/-25ls [0\OML/lmm/m/it/10/-25ls ::wtot\OT1/lmr/m/n/10/-25ls ]\OML/lmm/m/i
-t/10/-25ls ; j < \OMS/lmsy/m/n/10/-25ls ^^@\OT1/lmr/m/n/10/-25ls [0\OML/lmm/m/i
-t/10/-25ls ::n\OT1/lmr/m/n/10/-25ls ]]\OML/lmm/m/it/10/-25ls ksw\OT1/lmr/m/n/10
-/-25ls 0 =
- []
-
-[3] [4] [5]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 465.
- [6
-
-]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 465.
+[8]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 688.
  (./DaaNotes.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 465.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 465.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 688.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 688.
 Package rerunfilecheck Info: File `DaaNotes.out' has not changed.
-(rerunfilecheck)             Checksum: C1599C3B823B9F49F5A2A074250569EB;1856.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 465.
+(rerunfilecheck)             Checksum: 21ED44CBE61A325D7F15334F61CCC4F0;2735.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 688.
  ) 
 Here is how much of TeX's memory you used:
- 12122 strings out of 495021
- 182134 string characters out of 3181283
- 356135 words of memory out of 3000000
- 15090 multiletter control sequences out of 15000+200000
- 111076 words of font info for 80 fonts, out of 3000000 for 9000
+ 13661 strings out of 495020
+ 202291 string characters out of 3181260
+ 430384 words of memory out of 3000000
+ 16009 multiletter control sequences out of 15000+200000
+ 155008 words of font info for 281 fonts, out of 3000000 for 9000
  36 hyphenation exceptions out of 8191
- 45i,20n,53p,591b,673s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 45i,20n,53p,591b,1850s stack positions out of 5000i,500n,10000p,200000b,50000s
+{c:/texlive/2012/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{c:/texlive/2012/tex
+mf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/texlive/2012/texmf-dist/fonts/enc/
+dvips/lm/lm-rm.enc}{c:/texlive/2012/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc
+}{c:/texlive/2012/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}<c:/texlive/2012/
+texmf-dist/fonts/type1/public/lm/lmbx10.pfb><c:/texlive/2012/texmf-dist/fonts/t
+ype1/public/lm/lmbx12.pfb><c:/texlive/2012/texmf-dist/fonts/type1/public/lm/lmb
+x7.pfb><c:/texlive/2012/texmf-dist/fonts/type1/public/lm/lmex10.pfb><c:/texlive
+/2012/texmf-dist/fonts/type1/public/lm/lmmi10.pfb><c:/texlive/2012/texmf-dist/f
+onts/type1/public/lm/lmmi5.pfb><c:/texlive/2012/texmf-dist/fonts/type1/public/l
+m/lmmi7.pfb><c:/texlive/2012/texmf-dist/fonts/type1/public/lm/lmmi9.pfb><c:/tex
+live/2012/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/texlive/2012/texmf-dis
+t/fonts/type1/public/lm/lmr5.pfb><c:/texlive/2012/texmf-dist/fonts/type1/public
+/lm/lmr7.pfb><c:/texlive/2012/texmf-dist/fonts/type1/public/lm/lmr9.pfb><c:/tex
+live/2012/texmf-dist/fonts/type1/public/lm/lmri10.pfb><c:/texlive/2012/texmf-di
+st/fonts/type1/public/lm/lmss10.pfb><c:/texlive/2012/texmf-dist/fonts/type1/pub
+lic/lm/lmsy10.pfb><c:/texlive/2012/texmf-dist/fonts/type1/public/lm/lmsy7.pfb><
+c:/texlive/2012/texmf-dist/fonts/type1/public/lm/lmsy9.pfb><c:/texlive/2012/tex
+mf-dist/fonts/type1/public/lm/lmtk10.pfb><c:/texlive/2012/texmf-dist/fonts/type
+1/public/lm/lmtt10.pfb><c:/texlive/2012/texmf-dist/fonts/type1/public/lm/lmtt9.
+pfb><c:/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
+<c:/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on DaaNotes.pdf (8 pages, 409768 bytes).
+PDF statistics:
+ 684 PDF objects out of 1000 (max. 8388607)
+ 645 compressed objects within 7 object streams
+ 314 named destinations out of 1000 (max. 500000)
+ 50977 words of extra memory for PDF output out of 51595 (max. 10000000)
 
-Output written on DaaNotes.dvi (6 pages, 89072 bytes).
