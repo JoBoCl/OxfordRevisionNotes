@@ -686,4 +686,7 @@ By sending out a `wave' from a source edge $s$, all nodes 1 edge from $s$ will b
 	}
 \end{algorithm}
 The initial setup records that $s$ can be reached from itself in 0 time and in 0 steps, and that, as far as we know, all other vertices cannot be reached, and therefore take an infinite amount of time to be reached.  In the \texttt{for}-loop, the next unfinished node is examined.  All adjacent nodes that have not yet been seen have their shortest distance recorded and their backpointer set.
+\paragraph{Running Time}$O(|V|+|E|)$.  $O(|V|)$ as every vertex is enqueued at most once, $O(|E|)$ as every vertex dequeued at most once, and $(u,v)$ is examined only when $u$ is dequeued, therefore every edge is examined at most once if the graph is directed, and twice is the graph is undirected.
+
+Unlike DFS, BFS may not reach all the vertices, as it only works outwards from a source vertex.  If there is no path from $s$ to $v$, then it will not be discovered.
 \end{document}
