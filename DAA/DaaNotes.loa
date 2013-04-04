@@ -1,25 +1,25 @@
 \contentsline {algocf}{\numberline {1}{\ignorespaces Merge Sort}}{2}{algocf.1}
-\contentsline {algocf}{\numberline {2}{\ignorespaces Binary Search}}{2}{algocf.2}
-\contentsline {algocf}{\numberline {3}{\ignorespaces Partition algorithm}}{2}{algocf.3}
-\contentsline {algocf}{\numberline {4}{\ignorespaces Selection Algorithm}}{2}{algocf.4}
-\contentsline {algocf}{\numberline {5}{\ignorespaces Knapsack Problem with repetition}}{3}{algocf.5}
-\contentsline {algocf}{\numberline {6}{\ignorespaces Knapsack Problem without repetition}}{3}{algocf.6}
-\contentsline {algocf}{\numberline {7}{\ignorespaces Change giving algorithm}}{4}{algocf.7}
-\contentsline {algocf}{\numberline {8}{\ignorespaces Levenshtein Distance}}{4}{algocf.8}
+\contentsline {algocf}{\numberline {2}{\ignorespaces Binary Search}}{3}{algocf.2}
+\contentsline {algocf}{\numberline {3}{\ignorespaces Partition algorithm}}{3}{algocf.3}
+\contentsline {algocf}{\numberline {4}{\ignorespaces Selection Algorithm}}{3}{algocf.4}
+\contentsline {algocf}{\numberline {5}{\ignorespaces Knapsack Problem with repetition}}{4}{algocf.5}
+\contentsline {algocf}{\numberline {6}{\ignorespaces Knapsack Problem without repetition}}{4}{algocf.6}
+\contentsline {algocf}{\numberline {7}{\ignorespaces Change giving algorithm}}{5}{algocf.7}
+\contentsline {algocf}{\numberline {8}{\ignorespaces Levenshtein Distance}}{5}{algocf.8}
 \contentsline {algocf}{\numberline {9}{\ignorespaces Floyd-Warshall Algorithm}}{5}{algocf.9}
 \contentsline {algocf}{\numberline {10}{\ignorespaces Generic MST algorithm}}{5}{algocf.10}
-\contentsline {algocf}{\numberline {11}{\ignorespaces Kruskal's Algorithm}}{5}{algocf.11}
-\contentsline {algocf}{\numberline {12}{\ignorespaces Prim's Algorithm}}{5}{algocf.12}
-\contentsline {algocf}{\numberline {13}{\ignorespaces Heapify algorithm}}{6}{algocf.13}
-\contentsline {algocf}{\numberline {14}{\ignorespaces Make-Heap algorithm}}{6}{algocf.14}
-\contentsline {algocf}{\numberline {15}{\ignorespaces Heap-Sort}}{6}{algocf.15}
+\contentsline {algocf}{\numberline {11}{\ignorespaces Kruskal's Algorithm}}{6}{algocf.11}
+\contentsline {algocf}{\numberline {12}{\ignorespaces Prim's Algorithm}}{6}{algocf.12}
+\contentsline {algocf}{\numberline {13}{\ignorespaces Heapify algorithm}}{7}{algocf.13}
+\contentsline {algocf}{\numberline {14}{\ignorespaces Make-Heap algorithm}}{7}{algocf.14}
+\contentsline {algocf}{\numberline {15}{\ignorespaces Heap-Sort}}{7}{algocf.15}
 \contentsline {algocf}{\numberline {16}{\ignorespaces Return the maximal element of the queue}}{7}{algocf.16}
 \contentsline {algocf}{\numberline {17}{\ignorespaces Extract Max Algorithm}}{7}{algocf.17}
-\contentsline {algocf}{\numberline {18}{\ignorespaces Increase Key Algorithm}}{7}{algocf.18}
-\contentsline {algocf}{\numberline {19}{\ignorespaces Insertion Algorithm}}{7}{algocf.19}
+\contentsline {algocf}{\numberline {18}{\ignorespaces Increase Key Algorithm}}{8}{algocf.18}
+\contentsline {algocf}{\numberline {19}{\ignorespaces Insertion Algorithm}}{8}{algocf.19}
 \contentsline {algocf}{\numberline {20}{\ignorespaces Depth-First Search Algorithm}}{8}{algocf.20}
-\contentsline {algocf}{\numberline {21}{\ignorespaces Topological Sort}}{8}{algocf.21}
-\contentsline {algocf}{\numberline {22}{\ignorespaces Strongly Connected Component Discovery}}{8}{algocf.22}
-\contentsline {algocf}{\numberline {23}{\ignorespaces Bread-First Search}}{8}{algocf.23}
-\contentsline {algocf}{\numberline {24}{\ignorespaces Djikstra's Shortest Path Algorithm}}{9}{algocf.24}
-\contentsline {algocf}{\numberline {25}{\ignorespaces Bellman-Ford Algorithm}}{9}{algocf.25}
+\contentsline {algocf}{\numberline {21}{\ignorespaces Topological Sort}}{9}{algocf.21}
+\contentsline {algocf}{\numberline {22}{\ignorespaces Strongly Connected Component Discovery}}{9}{algocf.22}
+\contentsline {algocf}{\numberline {23}{\ignorespaces Bread-First Search}}{9}{algocf.23}
+\contentsline {algocf}{\numberline {24}{\ignorespaces Djikstra's Shortest Path Algorithm}}{10}{algocf.24}
+\contentsline {algocf}{\numberline {25}{\ignorespaces Bellman-Ford Algorithm}}{10}{algocf.25}

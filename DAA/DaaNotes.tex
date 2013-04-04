@@ -36,6 +36,58 @@
 \maketitle
 \tableofcontents
 \listofalgorithms
+\section{Analysis}
+\subsection{Asymptotic Notation}
+\subsubsection{Big-O Notation}
+For the functions $f,g:\mathbb N\mapsto \mathbb R_{\ge0}$, let the set
+\begin{align*}
+	O(g(n)) :=\{&f:\mathbb N\mapsto \mathbb R^+ : \exists n_0\in\mathbb N^+ \cdot \exists c \in \mathbb R^+ \cdot\\
+			  & n \ge n_0 \rightarrow f(n) \le c \times g(n)\}
+\end{align*}
+$f\in O(g)$, if, for some large enough $n$, $f(n)\le c\times g(n)$ for some constant factor $c$.  The set $O(g)$ is the set of functions bounded above by $g$, without taking into account constant factors.
+
+When the equals sign is used in Big-O notation, it does not imply the usual property of symmetry associated with equality. $n=O(n^2)$, but $n^2\neq O(n)$.  Additionally, $n=O(n^3)$ and $n^2=O(n^3)$, but $n\neq n^2$.
+
+Big-O notation has the following properties:
+\begin{itemize}
+	\item $\forall c \in R_{\ge0}$, if $f\in O(g)$ then $cf\in O(g)$
+	\item $\forall c \in R_{\ge0}$, if $f\in O(g)$ then $f\in O(cg)$, (hence where writing log operations without bases comes from).
+	\item If $f_1\in O\left( g_1 \right)$ and $f_2\in O\left( g_2 \right)$ then $f_1+f_2\in O\left( g_1+g_2 \right)$
+	\item If $f_1\in O\left( g_1 \right)$ and $f_2\in O\left( g_2 \right)$ then $f_1+f_2\in O\left( \max\left(g_1,g_2\right) \right)$
+	\item If $f_1\in O\left( g_1 \right)$ and $f_2\in O\left( g_2 \right)$ then $f_1\times f_2\in O\left( g_1\times g_2 \right)$
+	\item If $f\in O\left( g \right)$, and $g\in O\left( h \right)$, then $f\in O(h)$
+	\item Every polynomial of degree $l\ge 0$ is in $O\left( n^l \right)$
+	\item $\forall c\in \mathbb R\cdot \lg\left( n^c \right)\in O\left( \lg n \right)$
+	\item $\forall c,d>0 \cdot \lg^cn\in O\left( n^d \right)$
+	\item $\forall c >0\land d>0 \cdot n^c\in O\left( d^n \right)$
+\end{itemize}
+\subsubsection{Big-Omega Notation}
+For the functions $f,g:\mathbb N\mapsto \mathbb R_{\ge0}$, let the set
+\begin{align*}
+	\Omega(g(n)) :=\{&f:\mathbb N\mapsto \mathbb R^+ : \exists n_0\in\mathbb N^+ \cdot \exists c \in \mathbb R^+ \cdot\\
+			  & n \ge n_0 \rightarrow f(n) \ge c \times g(n)\}
+\end{align*}
+$f\in \Omega(g)$, if, for some large enough $n$, $f(n)\ge c\times g(n)$ for some constant factor $c$.  The set $O(g)$ is the set of functions bounded below by $g$, without taking into account constant factors.
+\subsubsection{Big-Theta Notation}
+For the functions $f,g:\mathbb N\mapsto \mathbb R_{\ge0}$, if $f\in \Theta(g)$, then $g$ is an asymptotic upper and lower bound to $f$.  That is, for $c_1,c_2\in\mathbb R_{>0}$ and $n_0$ such that, for all $n\ge n_0$ \[c_1g(n)\le f(n)\le c_2g(n)\]
+\subsection{Recurrence Relations}
+There are four methods to solve recurrence relations:
+\begin{enumerate}
+	\item Recursion tree -- by unfolding at each level, and substituting in the non-recursive term, and approximation for each level can be found.  By determining the number of levels, and the cost of the final level, a total cost can be discovered.
+	\item Iterative substitution -- similar to above, but without drawing the diagram.
+	\item Guess-and-Test -- by substituting in an approximation, either a contradiction will be discovered $-T(n)\ge 0$, or none will be found, hence the correct form of $T(n)$ has been discovered.
+	\item The Master Theorem
+\end{enumerate}
+\subsubsection{The Master Theorem}
+Suppose\[T(n)=\begin{cases} O(1)&\text{ if }n=1\\ aT(\lceil n/b\rceil)+O(n^d)&\text{ if }n>1\end{cases}\]then for some constants $a>0,b>1,d\ge 0$
+	\[T(n)=\begin{cases} O(n^d)&\text{ if }d>\log_ba\\O(n^d\log_bn)&\text{ if }d=\log_ba\\O(n^{\log_ba})&\text{ if }d<\log_ba\end{cases}\]
+\subsection{Correctness and Invariants}
+Loop-Invariant correctness proofs allow a program to be proven to be correct by a process similar to mathematical induction.
+\begin{description}
+	\item[Initialisation] -- prove that an invariant $I$ holds just before the first iteration (base case)
+	\item[Maintenance] -- prove that if $I$ holds just before the start of a loop, it holds just before the next loop (inductive case)
+	\item[Termination] -- prove that, when the loop terminates, $I$ and the reason for termination guarantee the end result is correct.
+\end{description}
 \section{Design Principles}
 \subsection{Divide and Conquer}
 The divide-and-conquer strategy can be thought of as solving problems in the following steps:

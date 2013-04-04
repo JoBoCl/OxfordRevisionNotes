@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/W32TeX) (format=pdflatex 2013.3.27)  3 APR 2013 19:55
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/W32TeX) (format=pdflatex 2013.3.27)  4 APR 2013 10:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -857,83 +857,86 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 \tf@loa=\write5
 \openout5 = `DaaNotes.loa'.
 
-LaTeX Font Info:    Try loading font information for T1+lmtt on input line 71.
- (c:/texlive/2012/texmf-dist/tex/latex/lm/t1lmtt.fd
+LaTeX Font Info:    Try loading font information for OMS+lmr on input line 52.
+ (c:/texlive/2012/texmf-dist/tex/latex/lm/omslmr.fd
+File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 52.
+ [1{c:/texlive/2012/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+
+
+
+]
+LaTeX Font Info:    Try loading font information for T1+lmtt on input line 123.
+
+
+(c:/texlive/2012/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 Package microtype Info: Loading generic settings for font family
 (microtype)             `lmtt' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-LaTeX Font Info:    Try loading font information for OMS+lmr on input line 92.
-
-(c:/texlive/2012/texmf-dist/tex/latex/lm/omslmr.fd
-File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 92.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 103.
+(Font)              <9> on input line 155.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 103.
- [1{c:/texlive/2012/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
-
-
-
-] [2pdfTeX warning (ext4): destination with the same identifier (name{AlgoLine.
-1.1}) has been already used, duplicate ignored
+(Font)              <6> on input line 155.
+ [2pdfTeX warning (ext4): destination with the same identifier (name{AlgoLine.1
+.1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.179 \begin{align*}
-                    pdfTeX warning (ext4): destination with the same identifier
- (name{AlgoLine.1.2}) has been already used, duplicate ignored
+l.165 merge :
+             : [a] -> [a] -> [a]pdfTeX warning (ext4): destination with the sam
+e identifier (name{AlgoLine.1.2}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.179 \begin{align*}
-                    pdfTeX warning (ext4): destination with the same identifier
- (name{AlgoLine.1.3}) has been already used, duplicate ignored
+l.165 merge :
+             : [a] -> [a] -> [a]pdfTeX warning (ext4): destination with the sam
+e identifier (name{AlgoLine.1.3}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.179 \begin{align*}
-                    pdfTeX warning (ext4): destination with the same identifier
- (name{AlgoLine.1.4}) has been already used, duplicate ignored
+l.165 merge :
+             : [a] -> [a] -> [a]pdfTeX warning (ext4): destination with the sam
+e identifier (name{AlgoLine.1.4}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.179 \begin{align*}
-                    pdfTeX warning (ext4): destination with the same identifier
- (name{AlgoLine.1.5}) has been already used, duplicate ignored
+l.165 merge :
+             : [a] -> [a] -> [a]pdfTeX warning (ext4): destination with the sam
+e identifier (name{AlgoLine.1.5}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.179 \begin{align*}
-                    pdfTeX warning (ext4): destination with the same identifier
- (name{AlgoLine.1.6}) has been already used, duplicate ignored
+l.165 merge :
+             : [a] -> [a] -> [a]pdfTeX warning (ext4): destination with the sam
+e identifier (name{AlgoLine.1.6}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.179 \begin{align*}
-                    ]
-Overfull \hbox (3.37141pt too wide) in paragraph at lines 204--205
+l.165 merge :
+             : [a] -> [a] -> [a]] [3]
+Overfull \hbox (3.37141pt too wide) in paragraph at lines 256--257
 \T1/lmr/m/n/10/-25ls (-50) For the $\OML/lmm/m/it/10/-25ls n$ \T1/lmr/m/n/10/-2
 5ls (-50) items, each of weight $\OML/lmm/m/it/10/-25ls w[]; w[] [] w[]$ \T1/lm
 r/m/n/10/-25ls (-50) and value $\OML/lmm/m/it/10/-25ls v[]; v[]; [] v[]$
  []
 
 
-Overfull \hbox (3.37141pt too wide) in paragraph at lines 217--218
+Overfull \hbox (3.37141pt too wide) in paragraph at lines 269--270
 \T1/lmr/m/n/10/-25ls (-50) For the $\OML/lmm/m/it/10/-25ls n$ \T1/lmr/m/n/10/-2
 5ls (-50) items, each of weight $\OML/lmm/m/it/10/-25ls w[]; w[] [] w[]$ \T1/lm
 r/m/n/10/-25ls (-50) and value $\OML/lmm/m/it/10/-25ls v[]; v[]; [] v[]$
  []
 
-[3] [4] [5] [6]
+[4] [5] [6]
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 549.
-LaTeX Font Info:    Try loading font information for T1+lmss on input line 599.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 601.
+ [7]
+LaTeX Font Info:    Try loading font information for T1+lmss on input line 651.
 
  (c:/texlive/2012/texmf-dist/tex/latex/lm/t1lmss.fd
 File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
@@ -942,37 +945,39 @@ Package microtype Info: Loading generic settings for font family
 (microtype)             `lmss' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
- [7]
-[8]
-Overfull \hbox (28.1865pt too wide) detected at line 699
+ [8]
+Overfull \hbox (28.1865pt too wide) detected at line 751
 \OML/lmm/m/it/10/-25ls ^^N\OT1/lmr/m/n/10/-25ls (\OML/lmm/m/it/10/-25ls u; v\OT
 1/lmr/m/n/10/-25ls ) := []
  []
 
 
-Overfull \hbox (23.68713pt too wide) in paragraph at lines 707--708
+Overfull \hbox (23.68713pt too wide) in paragraph at lines 759--760
 \T1/lmr/m/n/10/-25ls (-50) undi-rected graphs with non-negative weights in $\OM
 L/lmm/m/it/10/-25ls O []$ 
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 766.
 [9]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 766.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 818.
+ [10
+
+]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 818.
  (./DaaNotes.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 766.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 766.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 818.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 818.
 Package rerunfilecheck Info: File `DaaNotes.out' has not changed.
-(rerunfilecheck)             Checksum: 99179ED6BA195BD912B06085B263A675;3044.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 766.
+(rerunfilecheck)             Checksum: B8F8976EF26C416A33A68D2B7E4617E4;3611.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 818.
  ) 
 Here is how much of TeX's memory you used:
- 13730 strings out of 495020
- 203347 string characters out of 3181260
- 419444 words of memory out of 3000000
- 16034 multiletter control sequences out of 15000+200000
- 172560 words of font info for 293 fonts, out of 3000000 for 9000
+ 13769 strings out of 495020
+ 203907 string characters out of 3181260
+ 438444 words of memory out of 3000000
+ 16042 multiletter control sequences out of 15000+200000
+ 173556 words of font info for 305 fonts, out of 3000000 for 9000
  36 hyphenation exceptions out of 8191
- 45i,20n,53p,591b,1850s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 45i,20n,53p,591b,1846s stack positions out of 5000i,500n,10000p,200000b,50000s
 {c:/texlive/2012/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{c:/texlive/2012/tex
 mf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/texlive/2012/texmf-dist/fonts/enc/
 dvips/lm/lm-rm.enc}{c:/texlive/2012/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc
@@ -994,10 +999,10 @@ mf-dist/fonts/type1/public/lm/lmtk10.pfb><c:/texlive/2012/texmf-dist/fonts/type
 1/public/lm/lmtt10.pfb><c:/texlive/2012/texmf-dist/fonts/type1/public/lm/lmtt9.
 pfb><c:/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
 <c:/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on DaaNotes.pdf (9 pages, 420099 bytes).
+Output written on DaaNotes.pdf (10 pages, 431034 bytes).
 PDF statistics:
- 743 PDF objects out of 1000 (max. 8388607)
- 702 compressed objects within 8 object streams
- 344 named destinations out of 1000 (max. 500000)
- 52545 words of extra memory for PDF output out of 61914 (max. 10000000)
+ 793 PDF objects out of 1000 (max. 8388607)
+ 751 compressed objects within 8 object streams
+ 357 named destinations out of 1000 (max. 500000)
+ 52609 words of extra memory for PDF output out of 61914 (max. 10000000)
 
